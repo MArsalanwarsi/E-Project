@@ -1,3 +1,12 @@
+<?php
+session_start();
+include '../config.php';
+
+if (!isset($_SESSION['username'])) {
+    header('location:signin.php');
+}
+$data=mysqli_fetch_assoc(mysqli_query(connection(),"SELECT * FROM users WHERE id = '$_SESSION[username]'"));
+?>
 <!doctype html>
 <html lang="en">
 

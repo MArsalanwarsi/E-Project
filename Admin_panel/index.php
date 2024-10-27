@@ -1013,6 +1013,8 @@ include 'body_start.php';
 include 'body_end.php';
 include 'footer.php';
 ?>
+	<script src="assets/js/dashboard-eCommerce.js"></script>
+
 <script>
 	$(document).ready(function() {
 		$('#Transaction-History').DataTable({
