@@ -74,11 +74,12 @@ include 'body_start.php';
 			</div>
 		</div>
 		<!--end breadcrumb-->
-		<form action="code.php" method="POST" enctype="multipart/form-data">
+		<form action="" method="post" enctype="multipart/form-data" id="product_form">
 			<div class="card">
 				<div class="card-body p-4">
 					<h5 class="card-title">Add New Product</h5>
 					<hr />
+					<div class="alerts_ajax"></div>
 
 					<div class="form-body mt-4">
 						<div class="row">
@@ -152,10 +153,15 @@ include 'body_start.php';
 										<div class="col-12">
 											<label for="inputCategory" class="form-label">Book Category</label>
 											<select class="form-select" id="inputCategory">
-												<option></option>
-												<option value="1">One</option>
-												<option value="2">Two</option>
-												<option value="3">Three</option>
+												<?php
+												$data = mysqli_query(connection(), "select * from categories");
+												foreach ($data as $row) {
+												?>
+													<option value="<?php echo $row['category_name'] ?>"><?php echo $row['category_name'] ?></option>
+												<?php
+												}
+												?>
+
 											</select>
 										</div>
 										<div class="col-12">
@@ -167,7 +173,7 @@ include 'body_start.php';
 										</div>
 										<div class="col-12">
 											<div class="d-grid">
-												<input type="submit" class="btn btn-light" name="add_book" value="Save Book" >
+												<input type="submit" class="btn btn-light" name="add_book" value="Save Book">
 											</div>
 										</div>
 									</div>
@@ -207,17 +213,72 @@ include 'footer.php';
 
 		})();
 
+		// submit through ajax
+		// $('#product_form').submit(function(e) {
+		// 	e.preventDefault();
+		// 	var formData = new FormData($(this)[0]);
+		// 	$.ajax({
+		// 		url: 'code.php',
+		// 		type: 'POST',
+		// 		data: formData,
+		// 		contentType: false,
+		// 		processData: false,
+		// 		success: function(response) {
+		// 			$('#product_form.alerts_ajax').html(response);
+
+		// 		}
+		// 	});
+		// });
+		$('#product_form').submit(function(e) {
+
+			e.preventDefault();
+			// validation
+
+			var formData = new FormData($(this)[0]);
+
+			$.ajax({
+
+				url: 'code.php',
+
+				type: 'POST',
+
+				data: formData,
+
+				cache: false,
+
+				contentType: false,
+
+				processData: false,
+
+				success: function(response) {
+					$(".alerts_ajax").html(response);
+					// disable submit button
+					$('#product_form input[type="submit"]').prop('disabled', true);
+					// remove  after 3 seconds
+					setTimeout(function() {
+						location.reload();
+					}, 3000);
+
+				}
+
+			});
+
+		});
+
+
+
+
 	})
 
 	function pdfcheck() {
 		var x = document.getElementById("inputBookType").value;
 		if (x == "yes") {
 			$('.pdf_price').removeClass('d-none');
+			document.getElementById("inputpdf_price").removeAttribute("disabled")
+
 		} else {
 			$('.pdf_price').addClass('d-none');
-			document.getElementById("inputpdf_price").setAttribute("disabled","true")
+			document.getElementById("inputpdf_price").setAttribute("disabled", "true")
 		}
 	}
 </script>
-<!--app JS-->
-<

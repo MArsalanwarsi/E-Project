@@ -55,6 +55,7 @@ include 'header.php';
 </style>
 <?php
 include 'body_start.php';
+$data=mysqli_fetch_assoc(mysqli_query(connection(),"SELECT * FROM categories WHERE id = '$_GET[id]'"));
 ?>
 <!--start page wrapper -->
 <div class="page-wrapper">
@@ -68,16 +69,17 @@ include 'body_start.php';
 					<ol class="breadcrumb mb-0 p-0">
 						<li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
 						</li>
-						<li class="breadcrumb-item active" aria-current="page">Add New Category</li>
+						<li class="breadcrumb-item active" aria-current="page">Update Category</li>
 					</ol>
 				</nav>
 			</div>
 		</div>
 		<!--end breadcrumb-->
 		<form action="" method="POST" enctype="multipart/form-data" id="category_form">
+			<input type="hidden" name="id" value="<?php echo $data['id']; ?>">">
 			<div class="card">
 				<div class="card-body p-4">
-					<h5 class="card-title">Add New Category</h5>
+					<h5 class="card-title">Update Category</h5>
 					<hr />
 					<div class="alerts_ajax">
 					
@@ -87,16 +89,16 @@ include 'body_start.php';
 							<div class="col-lg-8">
 								<div class="border border-3 p-4 rounded">
 									<div class="mb-3">
-										<label for="inputBookCategory" class="form-label">Book Category <span class="text-warning">(Reqired)</span></label>
-										<input type="text" class="form-control" id="inputBookCategory" placeholder="Enter Book Category" name="book_Category">
+										<label for="inputBookCategory" class="form-label">Book Category</label>
+										<input type="text" class="form-control" id="inputBookCategory" placeholder="Enter Book Category" name="book_Category_update" value="<?php echo $data['category_name']; ?>">
 									</div>
 									<div class="mb-3">
-										<label for="inputBookDescription" class="form-label">Category Images <span class="text-warning">(Reqired)</span></label>
+										<label for="inputBookDescription" class="form-label">Category Images <span class="text-warning">(Optional)</span></label>
 										<div class="container">
 											<div class="row justify-content-start">
 												<div class="col-12 col-sm-12 col-md-12 p-3">
 													<div class="form-group">
-														<input type="file" name="category_image" id="file" class="input-file">
+														<input type="file" name="category_image_update" id="file" class="input-file">
 														<label for="file" class="btn btn-tertiary js-labelFile">
 															<i class="icon fa fa-check"></i>
 															<span class="js-fileName">Choose Category image</span>
@@ -111,7 +113,7 @@ include 'body_start.php';
 									</div>
 									<div class="mb-3 d-flex justify-content-end">
 										<div class="d-grid">
-											<input type="submit" class="btn btn-light px-5 py-2" name="add_category" value="Save Category" style="max-width: 200px;">
+											<input type="submit" class="btn btn-light px-5 py-2" name="add_category" value="Update Category" style="max-width: 200px;">
 										</div>
 									</div>
 								</div>
@@ -190,6 +192,16 @@ include 'footer.php';
 
 
 	})
+
+	function pdfcheck() {
+		var x = document.getElementById("inputBookType").value;
+		if (x == "yes") {
+			$('.pdf_price').removeClass('d-none');
+		} else {
+			$('.pdf_price').addClass('d-none');
+			document.getElementById("inputpdf_price").setAttribute("disabled", "true")
+		}
+	}
 </script>
 <!--app JS-->
 <

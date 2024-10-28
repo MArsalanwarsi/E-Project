@@ -30,8 +30,17 @@ include 'body_start.php';
 				</div>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col-12">
 
-		<div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 product-grid">
+				<div class="alert_data">
+
+				</div>
+
+			</div>
+		</div>
+
+		<div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 product-grid allbooksdata">
 			<?php
 			$query = "SELECT * FROM categories";
 			$result = mysqli_query(connection(), $query);
@@ -46,13 +55,28 @@ include 'body_start.php';
 							<div class="clearfix">
 
 								<div class="btn-group mb-0 float-end " role="group" aria-label="Basic example">
-									<!-- <form action="code.php" method="POST">
-										<input type="hidden" name="category_id" value="<?php echo $row['id']; ?>"> -->
-										<button type="button" class="btn btn-light" name="delete_category" onclick="delete_category(<?php echo $row['id']; ?>)"><i class="bx bx-trash-alt text-danger" ></i>
-										</button>
-									<!-- </form> -->
-									<a type="button" class="btn btn-light"><i class="bx bx-pencil text-success"></i>
+									<button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#deleteModal<?php echo $row['id']; ?>"><i class="bx bx-trash-alt text-danger"></i>
+									</button>
+									<a type="button" href="update_category.php?id=<?php echo $row['id']; ?>" class="btn btn-light"><i class="bx bx-pencil text-success"></i>
 									</a>
+								</div>
+								<div class="modal fade" id="deleteModal<?php echo $row['id']; ?>" tabindex="-1" aria-hidden="true">
+									<div class="modal-dialog modal-lg modal-dialog-centered">
+										<div class="modal-content bg-danger">
+											<div class="modal-header">
+												<h5 class="modal-title text-white">Delete Category</h5>
+												<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+											</div>
+											<div class="modal-body text-white">
+												<p>Are you sure you want to delete?</p>
+
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+												<button type="button" class="btn btn-dark deletebtn" data-id="<?php echo $row['id']; ?>">Delete</button>
+											</div>
+										</div>
+									</div>
 								</div>
 
 							</div>
@@ -74,3 +98,26 @@ include 'body_start.php';
 include 'body_end.php';
 include 'footer.php';
 ?>
+<script>
+	$(document).ready(function() {
+		$('.deletebtn').on('click', function() {
+			var category_id = $(this).data('id');
+			$.ajax({
+				url: 'code.php',
+				method: 'POST',
+				data: {
+					category_id: category_id
+				},
+				success: function(data) {
+
+					$('.alert_data').html(data);
+					$('#deleteModal' + category_id).modal('hide');
+					setTimeout(function() {
+						location.reload();
+					}, 2000);
+
+				}
+			})
+		})
+	})
+</script>
