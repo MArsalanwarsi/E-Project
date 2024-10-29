@@ -87,11 +87,11 @@ include 'body_start.php';
 							<div class="col-lg-8">
 								<div class="border border-3 p-4 rounded">
 									<div class="mb-3">
-										<label for="inputBookCategory" class="form-label">Book Category <span class="text-warning">(Reqired)</span></label>
+										<label for="inputBookCategory" class="form-label">Book Category <span class="text-warning">(Required)</span></label>
 										<input type="text" class="form-control" id="inputBookCategory" placeholder="Enter Book Category" name="book_Category">
 									</div>
 									<div class="mb-3">
-										<label for="inputBookDescription" class="form-label">Category Images <span class="text-warning">(Reqired)</span></label>
+										<label for="inputBookDescription" class="form-label">Category Images <span class="text-warning">(Required)</span></label>
 										<div class="container">
 											<div class="row justify-content-start">
 												<div class="col-12 col-sm-12 col-md-12 p-3">

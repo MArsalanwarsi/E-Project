@@ -25,7 +25,8 @@ include 'header.php';
 
 	/* input file style */
 
-	.input-file {
+	.input-file,
+	.input-file2 {
 		width: 0.1px;
 		height: 0.1px;
 		opacity: 0;
@@ -33,7 +34,8 @@ include 'header.php';
 		position: absolute;
 		z-index: -1;
 
-		+.js-labelFile {
+		+.js-labelFile,
+		+.js-labelFile2 {
 			overflow: hidden;
 			text-overflow: ellipsis;
 			white-space: nowrap;
@@ -68,7 +70,7 @@ include 'body_start.php';
 					<ol class="breadcrumb mb-0 p-0">
 						<li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
 						</li>
-						<li class="breadcrumb-item active" aria-current="page">Add New Product</li>
+						<li class="breadcrumb-item active" aria-current="page">Add New Book</li>
 					</ol>
 				</nav>
 			</div>
@@ -77,7 +79,7 @@ include 'body_start.php';
 		<form action="" method="post" enctype="multipart/form-data" id="product_form">
 			<div class="card">
 				<div class="card-body p-4">
-					<h5 class="card-title">Add New Product</h5>
+					<h5 class="card-title">Add New Book</h5>
 					<hr />
 					<div class="alerts_ajax"></div>
 
@@ -86,21 +88,21 @@ include 'body_start.php';
 							<div class="col-lg-8">
 								<div class="border border-3 p-4 rounded">
 									<div class="mb-3">
-										<label for="inputBookTitle" class="form-label">Book Title</label>
+										<label for="inputBookTitle" class="form-label">Book Title <span class="text-warning">*</span></label>
 										<input type="text" class="form-control" id="inputBookTitle" placeholder="Enter Book title" name="book_title">
 									</div>
 									<div class="mb-3">
-										<label for="inputBookDescription" class="form-label">Description</label>
+										<label for="inputBookDescription" class="form-label">Description <span class="text-warning">*</span></label>
 										<textarea class="form-control" id="inputBookDescription" rows="3" placeholder="Enter Book Description" name="book_description"></textarea>
 									</div>
 									<!-- error in posting -->
 									<div class="mb-3">
-										<label for="inputBookDescription" class="form-label">Book Images</label>
+										<label for="inputBookDescription" class="form-label">Book Images <span class="text-warning">*</span></label>
 										<div class="container">
 											<div class="row justify-content-start">
 												<div class="col-12 col-sm-12 col-md-12 p-3">
 													<div class="form-group">
-														<input type="file" name="front_image" id="file" class="input-file">
+														<input type="file" name="front_image" id="file" class="input-file" accept="image/*">
 														<label for="file" class="btn btn-tertiary js-labelFile">
 															<i class="icon fa fa-check"></i>
 															<span class="js-fileName">Choose Front image</span>
@@ -109,10 +111,10 @@ include 'body_start.php';
 												</div>
 												<div class="col-12 col-sm-12 col-md-12 p-3">
 													<div class="form-group">
-														<input type="file" name="back_image" id="file" class="input-file">
-														<label for="file" class="btn btn-tertiary js-labelFile">
+														<input type="file" name="back_image" id="file2" class="input-file2" accept="image/*">
+														<label for="file2" class="btn btn-tertiary js-labelFile2">
 															<i class="icon fa fa-check"></i>
-															<span class="js-fileName">Choose Back image</span>
+															<span class="js-fileName2">Choose Back image</span>
 														</label>
 													</div>
 												</div>
@@ -128,31 +130,31 @@ include 'body_start.php';
 								<div class="border border-3 p-4 rounded">
 									<div class="row g-3">
 										<div class="col-md-6">
-											<label for="inputPrice" class="form-label">Orignal Price</label>
+											<label for="inputPrice" class="form-label">Orignal Price <span class="text-warning">*</span></label>
 											<input type="number" class="form-control" id="inputPrice" placeholder="00.00" name="orignal_price">
 										</div>
 										<div class="col-md-6">
-											<label for="inputCompareatprice" class="form-label">Discounted Price</label>
+											<label for="inputCompareatprice" class="form-label">Discounted Price <span class="text-warning">*</span></label>
 											<input type="number" class="form-control" id="inputCompareatprice" placeholder="00.00" name="discounted_price">
 										</div>
 										<div class="col-md-6">
-											<label for="inputBookType" class="form-label">PDF</label>
+											<label for="inputBookType" class="form-label">PDF <span class="text-warning">*</span></label>
 											<select class="form-select" id="inputBookType" name="pdf" onchange="pdfcheck()">
 												<option value="yes">Yes</option>
 												<option value="no">No</option>
 											</select>
 										</div>
 										<div class="col-md-6 pdf_price">
-											<label for="inputpdf_price" class="form-label">PDF Price</label>
+											<label for="inputpdf_price" class="form-label">PDF Price <span class="text-warning">*</span></label>
 											<input type="number" class="form-control" id="inputpdf_price" placeholder="00.00" name="pdf_price">
 										</div>
 										<div class="col-12">
-											<label for="inputBookAuthor" class="form-label">Book Author</label>
+											<label for="inputBookAuthor" class="form-label">Book Author <span class="text-warning">*</span></label>
 											<input type="text" class="form-control" id="inputBookAuthor" placeholder="Enter Book Author" name="book_author">
 										</div>
 										<div class="col-12">
-											<label for="inputCategory" class="form-label">Book Category</label>
-											<select class="form-select" id="inputCategory">
+											<label for="inputCategory" class="form-label">Book Category <span class="text-warning">*</span></label>
+											<select class="form-select" id="inputCategory" name="book_category">
 												<?php
 												$data = mysqli_query(connection(), "select * from categories");
 												foreach ($data as $row) {
@@ -164,13 +166,13 @@ include 'body_start.php';
 
 											</select>
 										</div>
-										<div class="col-12">
-											<label for="inputBookStatus" class="form-label">Book Status</label>
+										<!-- <div class="col-12">
+											<label for="inputBookStatus" class="form-label">Book Status </label>
 											<select class="form-select" id="inputBookStatus">
 												<option value="InStock">In Stock</option>
 												<option value="OutOfStock">Out Of Stock</option>
 											</select>
-										</div>
+										</div> -->
 										<div class="col-12">
 											<div class="d-grid">
 												<input type="submit" class="btn btn-light" name="add_book" value="Save Book">
@@ -213,22 +215,24 @@ include 'footer.php';
 
 		})();
 
-		// submit through ajax
-		// $('#product_form').submit(function(e) {
-		// 	e.preventDefault();
-		// 	var formData = new FormData($(this)[0]);
-		// 	$.ajax({
-		// 		url: 'code.php',
-		// 		type: 'POST',
-		// 		data: formData,
-		// 		contentType: false,
-		// 		processData: false,
-		// 		success: function(response) {
-		// 			$('#product_form.alerts_ajax').html(response);
+		(function() {
 
-		// 		}
-		// 	});
-		// });
+			'use strict';
+
+			$('.input-file2').each(function() {
+				var $input = $(this),
+					$label = $input.next('.js-labelFile2'),
+					labelVal = $label.html();
+
+				$input.on('change', function(element) {
+					var fileName = '';
+					if (element.target.value) fileName = element.target.value.split('\\').pop();
+					fileName ? $label.addClass('has-file').find('.js-fileName2').html(fileName) : $label.removeClass('has-file').html(labelVal);
+				});
+			});
+
+		})();
+
 		$('#product_form').submit(function(e) {
 
 			e.preventDefault();
@@ -251,13 +255,24 @@ include 'footer.php';
 				processData: false,
 
 				success: function(response) {
-					$(".alerts_ajax").html(response);
-					// disable submit button
-					$('#product_form input[type="submit"]').prop('disabled', true);
-					// remove  after 3 seconds
-					setTimeout(function() {
-						location.reload();
-					}, 3000);
+					if (response == "missing") {
+						$(".alerts_ajax").html("<div class='alert border-0 alert-dismissible fade show py-2'><div class='d-flex align-items-center'><div class='font-35 text-danger'><i class='bx bxs-message-square-x'></i></div><div class='ms-3'><h6 class='mb-0 text-white'>All Fields are required</h6></div></div><button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>");
+					} else if (response == "extention_error") {
+						$(".alerts_ajax").html("<div class='alert border-0 alert-dismissible fade show py-2'><div class='d-flex align-items-center'><div class='font-35 text-danger'><i class='bx bxs-message-square-x'></i></div><div class='ms-3'><h6 class='mb-0 text-white'>Failed to Add Book. Please Upload Valid Image (jpg, jpeg, png, webp)</h6></div></div><button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>")
+					} else if (response == "file_exist_error") {
+						$(".alerts_ajax").html("<div class='alert border-0 alert-dismissible fade show py-2'><div class='d-flex align-items-center'><div class='font-35 text-danger'><i class='bx bxs-message-square-x'></i></div><div class='ms-3'><h6 class='mb-0 text-white'>A file with the same name already exists in the destination folder. Please rename the file and try again.</h6></div></div><button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>")
+					} else if (response == "image_error") {
+						$(".alerts_ajax").html("<div class='alert border-0 alert-dismissible fade show py-2'><div class='d-flex align-items-center'><div class='font-35 text-danger'><i class='bx bxs-message-square-x'></i></div><div class='ms-3'><h6 class='mb-0 text-white'>Failed to Add Book. Please Try Again</h6></div></div><button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>")
+					} else if (response == "success") {
+						$(".alerts_ajax").html("<div class='alert border-0 alert-dismissible fade show py-2'><div class='d-flex align-items-center'><div class='font-35 text-success'><i class='bx bxs-check-circle'></i></div><div class='ms-3'><h6 class='mb-0 text-white'>Book Added Successfully</h6></div></div><button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>");
+						// disable submit button
+						$('#product_form input[type="submit"]').prop('disabled', true);
+						// remove  after 3 seconds
+						setTimeout(function() {
+							location.reload();
+						}, 3000);
+					}
+
 
 				}
 
