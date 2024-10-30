@@ -51,25 +51,57 @@
                         </li>
                     </ul>
                 </li>
-                <li class="menu-label">Pages</li>
+                <li class="menu-label">Orders</li>
                 <li>
-                    <a class="has-arrow" href="javascript:;">
-                        <div class="parent-icon"><i class="bx bx-lock"></i>
+                    <a href="javascript:;" class="has-arrow">
+                        <div class="parent-icon"><i class='bx bx-package'></i>
                         </div>
-                        <div class="menu-title">Users</div>
+                        <div class="menu-title">Orders</div>
                     </a>
                     <ul>
-                        <li> <a href="authentication-signin.html" target="_blank"><i class="bx bx-right-arrow-alt"></i>Sign In</a>
+                        <li> <a href="All_Orders.php"><i class="bx bx-right-arrow-alt"></i>All Orders</a>
                         </li>
-                        <li> <a href="authentication-signup.html" target="_blank"><i class="bx bx-right-arrow-alt"></i>Sign Up</a>
+                        <li> <a href="Pending_Orders.php"><i class="bx bx-right-arrow-alt"></i>Pending Orders</a>
+                        </li>
+                        <li> <a href="Shipped_Orders.php"><i class="bx bx-right-arrow-alt"></i>Shipped Orders</a>
+                        </li>
+                        <li> <a href="Delived_Orders.php"><i class="bx bx-right-arrow-alt"></i>Delivered Orders</a>
+                        </li>
+                        <li> <a href="Cancelled_Orders.php"><i class="bx bx-right-arrow-alt"></i>Cancelled Orders</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="menu-label">Managment</li>
+                <li>
+                    <a href="javascript:;" class="has-arrow">
+                        <div class="parent-icon"><i class='bx bx-user'></i>
+                        </div>
+                        <div class="menu-title">Customers</div>
+                    </a>
+                    <ul>
+                        <li> <a href="All_Customers.php"><i class="bx bx-right-arrow-alt"></i>All Customers</a>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="user-profile.html">
-                        <div class="parent-icon"><i class="bx bx-user-circle"></i>
+                    <a href="javascript:;" class="has-arrow">
+                        <div class="parent-icon"><i class='bx bx-user'></i>
                         </div>
-                        <div class="menu-title">User Profile</div>
+                        <div class="menu-title">Admins</div>
+                    </a>
+                    <ul>
+                        <li> <a href="All_Admins.php"><i class="bx bx-right-arrow-alt"></i>All Admins</a>
+                        </li>
+                        <li> <a href="Add_Admin.php"><i class="bx bx-right-arrow-alt"></i>Add Admin</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="menu-label">Settings</li>
+                <li>
+                    <a href="Website_Setting.php">
+                        <div class="parent-icon"><i class="bx bx-cog "></i>
+                        </div>
+                        <div class="menu-title">Website Info</div>
                     </a>
                 </li>
             </ul>
@@ -363,17 +395,19 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="user-box dropdown">
-                        <a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="assets/images/avatars/avatar-2.png" class="user-img" alt="user avatar">
+                    <div class="user-box dropdown ">
+                        <a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class='bx bx-user fs-4'></i>
                             <div class="user-info ps-3">
+
                                 <p class="user-name mb-0"><?php echo $data['name'] ?></p>
                             </div>
+                            <i class='bx bx-down-arrow-alt '></i>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="javascript:;"><i class="bx bx-user"></i><span>Profile</span></a>
+                            <li><a class="dropdown-item" href="index.php"><i class='bx bx-home-circle'></i><span>Dashboard</span></a>
                             </li>
-                            <li><a class="dropdown-item" href="javascript:;"><i class='bx bx-home-circle'></i><span>Dashboard</span></a>
+                            <li><a class="dropdown-item" href="Website_Setting.php"><i class="bx bx-cog"></i><span>Info</span></a>
                             </li>
                             <li>
                                 <div class="dropdown-divider mb-0"></div>

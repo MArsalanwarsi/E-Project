@@ -84,7 +84,7 @@ include 'body_start.php';
 						<div class="card-body">
 							<h6 class="card-title cursor-pointer"><?php echo $row['book_name'] ?></h6>
 							<div class="clearfix">
-								<p class="mb-0 float-start"><strong>134</strong> Sales</p>
+							
 								<p class="mb-0 float-end fw-bold"><span class="me-2 text-decoration-line-through">RS <?php echo $row['book_price'] ?></span><span class="text-white">RS <?php echo $row['after_discount_price'] ?></span></p>
 							</div>
 							<div class="d-flex align-items-center mt-3 fs-6">
@@ -100,7 +100,7 @@ include 'body_start.php';
 							<div class="btn-group mb-0 float-end mt-3" role="group" aria-label="Basic example">
 								<button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#deleteModal<?php echo $row['id']; ?>"><i class="bx bx-trash-alt text-danger"></i>
 								</button>
-								<a type="button" href="update_category.php?id=<?php echo $row['id']; ?>" class="btn btn-light"><i class="bx bx-pencil text-success"></i>
+								<a type="button" href="update_products.php?id=<?php echo $row['id']; ?>" class="btn btn-light"><i class="bx bx-pencil text-success"></i>
 								</a>
 							</div>
 							<div class="modal fade" id="deleteModal<?php echo $row['id']; ?>" tabindex="-1" aria-hidden="true">
