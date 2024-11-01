@@ -101,10 +101,12 @@ if (isset($_POST['book_Category_update'])) {
         }
     }
 }
+// ........... add book .............
 
 if (isset($_POST['book_title'])) {
     $book_title = $_POST['book_title'];
     $book_description = $_POST['book_description'];
+    $book_description = mysqli_real_escape_string(connection(), $book_description);
     $book_author = $_POST['book_author'];
     $orignal_price = $_POST['orignal_price'];
     $discounted_price = $_POST['discounted_price'];
@@ -197,6 +199,7 @@ if (isset($_POST['update_book_title'])) {
     $book_id = $_POST['update_id'];
     $book_title = $_POST['update_book_title'];
     $book_description = $_POST['book_description'];
+    $book_description = mysqli_real_escape_string(connection(), $book_description);
     $book_author = $_POST['book_author'];
     $orignal_price = $_POST['orignal_price'];
     $discounted_price = $_POST['discounted_price'];
@@ -253,6 +256,88 @@ if (isset($_POST['update_book_title'])) {
         }
         $result = mysqli_query(connection(), $sql);
 
+        if ($result) {
+            echo "success";
+        } else {
+            echo "failed";
+        }
+    }
+}
+
+// .....update Logo ......
+
+if (isset($_POST['logo_data'])) {
+    $logo = $_FILES['logo_image_update']['name'];
+    $extentions = array("jpg", "jpeg", "png", "webp", "JPG", "JPEG", "PNG", "WEBP");
+    $olddata = mysqli_fetch_assoc(mysqli_query(connection(), "SELECT * FROM website"));
+    if (!empty($logo)) {
+        $ext = strtolower(pathinfo($logo, PATHINFO_EXTENSION));
+        if (!in_array($ext, $extentions)) {
+            echo "extention_error";
+        } else {
+            $sql = "UPDATE website SET logo='$logo' WHERE id = '1'";
+            $result = mysqli_query(connection(), $sql);
+            if ($result) {
+                unlink("../Images/main_images/" . $olddata['logo_image']);
+                if (move_uploaded_file($_FILES['logo_image_update']['tmp_name'], "../Images/main_images/" . $logo)) {
+                    echo "success";
+                } else {
+                    echo "failed";
+                }
+            } else {
+                echo "failed";
+            }
+        }
+    } else {
+        echo "emty";
+    }
+}
+// ........update info .............
+if (isset($_POST['website_email'])) {
+    $name = $_POST['website_name'];
+    $email = $_POST['website_email'];
+    $phone = $_POST['website_phone'];
+    $address = $_POST['website_address'];
+    $website = $_POST['website_link'];
+    $website_facebook = $_POST['website_facebook'];
+    $website_instagram = $_POST['website_instagram'];
+    $website_whatsapp = $_POST['website_whatsapp'];
+    $website_info = $_POST['website_info'];
+    $website_info = mysqli_real_escape_string(connection(), $website_info);
+
+    if (empty($email) || empty($phone) || empty($address) || empty($website) || empty($website_facebook) || empty($website_instagram) || empty($website_whatsapp) || empty($website_info)) {
+        echo "missing";
+    } else {
+        $sql = "UPDATE website SET name='$name', email='$email', phone='$phone', address='$address', website_link='$website', facebook='$website_facebook', instagram='$website_instagram', whatsapp='$website_whatsapp', info='$website_info' WHERE id = '1'";
+        $result = mysqli_query(connection(), $sql);
+        if ($result) {
+            echo "success";
+        } else {
+            echo "failed";
+        }
+    }
+}
+
+// ............add Admins.............
+if (isset($_POST['add_admin_name'])) {
+    $name = $_POST['add_admin_name'];
+    $email = $_POST['add_admin_email'];
+    $password = sha1($_POST['add_admin_password']);
+    $alldata = mysqli_query(connection(), "SELECT * FROM users WHERE email = '$email' && role = 'admin'");
+
+    if (empty($name) || empty($email) || empty($password)) {
+        echo "missing";
+    } else if (!preg_match("/^[a-zA-Z-' ]*$/", $name)) {
+        echo "name_error";
+    } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo "email_error";
+    } else if (strlen($_POST['add_admin_password']) < 8) {
+        echo "password_error";
+    } else  if (mysqli_num_rows($alldata) > 0) {
+        echo "exist";
+    } else {
+        $sql = "INSERT INTO users (name, email, password, role) VALUES ('$name', '$email', '$password', 'admin')";
+        $result = mysqli_query(connection(), $sql);
         if ($result) {
             echo "success";
         } else {

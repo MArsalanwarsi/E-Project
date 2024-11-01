@@ -72,7 +72,7 @@ include 'body_start.php';
 				</div>
 			</div>
 		</div>
-<div class="container alert_data"></div>
+		<div class="container alert_data"></div>
 		<div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 product-grid">
 			<?php
 			$data = mysqli_query(connection(), "SELECT * FROM books");
@@ -80,11 +80,11 @@ include 'body_start.php';
 			?>
 				<div class="col">
 					<div class="card">
-						<img style="min-height: 220px;max-height:220px;" src="../Images/books_images/<?php echo $row['book_img1'] ?>" class="card-img-top" alt="...">
+						<a href="products_details.php?book_id=<?php echo $row['id'] ?>"><img style="min-height: 220px;max-height:220px;" src="../Images/books_images/<?php echo $row['book_img1'] ?>" class="card-img-top" alt="..."></a>
 						<div class="card-body">
 							<h6 class="card-title cursor-pointer"><?php echo $row['book_name'] ?></h6>
 							<div class="clearfix">
-							
+
 								<p class="mb-0 float-end fw-bold"><span class="me-2 text-decoration-line-through">RS <?php echo $row['book_price'] ?></span><span class="text-white">RS <?php echo $row['after_discount_price'] ?></span></p>
 							</div>
 							<div class="d-flex align-items-center mt-3 fs-6">
