@@ -7,6 +7,6 @@ if(isset($_GET['redirect'])){
     if($redirect=='admin'){
         header('location:admin_panel');
     }else{
-        header('location:index.php');
+        header("location:$redirect");
     }
 }

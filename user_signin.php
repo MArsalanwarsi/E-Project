@@ -48,25 +48,26 @@ $url = $client->createAuthUrl();
 										</p>
 									</div>
 									<div class="d-grid">
-										<a class="btn my-4 shadow-sm btn-light" href="<?=  $url; ?>"> <span class="d-flex justify-content-center align-items-center">
+										<a class="btn my-4 shadow-sm btn-light" href="<?= $url; ?>"> <span class="d-flex justify-content-center align-items-center">
 												<img class="me-2" src="assets/images/icons/search.svg" width="16" alt="Image Description">
 												<span>Sign in with Google</span>
 											</span>
-										</a> 
+										</a>
 									</div>
 									<div class="login-separater text-center mb-4"> <span>OR SIGN IN WITH EMAIL</span>
 										<hr />
 									</div>
+									<div class="errors_ajax"></div>
 									<div class="form-body">
 										<form class="row g-3">
 											<div class="col-12">
 												<label for="inputEmailAddress" class="form-label">Email Address</label>
-												<input type="email" class="form-control" id="inputEmailAddress" placeholder="Email Address">
+												<input type="email" class="form-control" id="inputEmailAddress" placeholder="Enter Email Address">
 											</div>
 											<div class="col-12">
 												<label for="inputChoosePassword" class="form-label">Enter Password</label>
 												<div class="input-group" id="show_hide_password">
-													<input type="password" class="form-control border-end-0" id="inputChoosePassword" value="12345678" placeholder="Enter Password"> <a href="javascript:;" class="input-group-text bg-transparent"><i class='bx bx-hide'></i></a>
+													<input type="password" class="form-control border-end-0" id="inputChoosePassword" placeholder="Enter Password"> <a class="input-group-text bg-transparent" onclick="showPassword()"><i class='bx bx-show pass_eye'></i></a>
 												</div>
 											</div>
 											<div class="col-md-6">
@@ -75,11 +76,11 @@ $url = $client->createAuthUrl();
 													<label class="form-check-label" for="flexSwitchCheckChecked">Remember Me</label>
 												</div>
 											</div>
-											<div class="col-md-6 text-end"> <a href="authentication-forgot-password.html">Forgot Password ?</a>
+											<div class="col-md-6 text-end"> <a href="user_forgot_password.php">Forgot Password ?</a>
 											</div>
 											<div class="col-12">
 												<div class="d-grid">
-													<button type="submit" class="btn btn-light"><i class="bx bxs-lock-open"></i>Sign in</button>
+													<button type="button" class="btn btn-light signInbtn"><i class="bx bxs-lock-open"></i>Sign in</button>
 												</div>
 											</div>
 										</form>
@@ -98,6 +99,60 @@ $url = $client->createAuthUrl();
 
 	<!--plugins-->
 	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/app.js"></script>
+	<script src="assets/plugins/simplebar/js/simplebar.min.js"></script>
+	<script src="assets/plugins/metismenu/js/metisMenu.min.js"></script>
+	<script src="assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
+	<script src="assets/js/bootstrap.bundle.min.js"></script>
+	<script>
+		function showPassword() {
+			var x = document.querySelector("#inputChoosePassword");
+			var y = document.querySelector(".pass_eye");
+			if (x.type === "password") {
+				x.type = "text";
+				y.classList.remove("bx-show");
+				y.classList.add("bx-hide");
+			} else {
+				x.type = "password";
+				y.classList.remove("bx-hide");
+				y.classList.add("bx-show");
+			}
+		}
+		$(document).ready(function() {
+			$(".signInbtn").click(function() {
+				$email = $("#inputEmailAddress").val();
+				$password = $("#inputChoosePassword").val();
+				if ($email == "" || $password == "") {
+					$(".errors_ajax").html("<div class='alert border-0 alert-dismissible fade show py-2'><div class='d-flex align-items-center'><div class='font-35 text-danger'><i class='bx bxs-message-square-x'></i></div><div class='ms-3'><h6 class='mb-0 text-white'>Fill Out All Fields</h6></div></div><button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>");
+				} else if (!(/^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/).test($email)) {
+					$(".errors_ajax").html("<div class='alert border-0 alert-dismissible fade show py-2'><div class='d-flex align-items-center'><div class='font-35 text-danger'><i class='bx bxs-message-square-x'></i></div><div class='ms-3'><h6 class='mb-0 text-white'>Email Incorrect</h6></div></div><button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>");
+				} else {
+
+					$.ajax({
+						type: "POST",
+						url: "code.php",
+						data: {
+							signin_email: $email,
+							signin_password: $password
+						},
+						success: function(data) {
+							if (data == "failed") {
+								$(".errors_ajax").html("<div class='alert border-0 alert-dismissible fade show py-2'><div class='d-flex align-items-center'><div class='font-35 text-danger'><i class='bx bxs-message-square-x'></i></div><div class='ms-3'><h6 class='mb-0 text-white'>Email or Password Incorrect</h6></div></div><button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>");
+							} else if (data == "success") {
+								$(".errors_ajax").html("<div class='alert border-0 alert-dismissible fade show py-2'><div class='d-flex align-items-center'><div class='font-35 text-success'><i class='bx bxs-check-circle'></i></div><div class='ms-3'><h6 class='mb-0 text-white'>Sign In Successfull</h6></div></div><button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>");
+								setTimeout(function() {
+									location.assign("index.php");
+								}, 2000);
+
+							} else {
+								alert(data)
+							}
+						}
+					});
+				}
+			})
+		})
+	</script>
 
 </body>
 

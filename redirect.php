@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'config.php';
 require __DIR__ . '/vendor/autoload.php';
 $client = new Google\Client;
@@ -15,6 +16,7 @@ if(isset($_GET['code'])){
     $sql=mysqli_query(connection(), "SELECT * FROM users WHERE email = '$user_email' && role = 'user'");
     if (mysqli_num_rows($sql) > 0) {
         $row = mysqli_fetch_assoc($sql);
+        mysqli_query(connection(), "UPDATE users SET last_login = NOW() WHERE id = '$row[id]'");
         $_SESSION['user'] = $row['email'];
         header('location: index.php');
     } else {
