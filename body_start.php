@@ -16,45 +16,9 @@
                     <div class="col-lg-8 d-none d-lg-block">
                         <nav class="mainmenu__nav">
                             <ul class="meninmenu d-flex justify-content-start">
-                                <li class="drop with--one--item"><a href="index-2.html">Home</a>
-                                    <div class="megamenu dropdown">
-                                        <ul class="item item01">
-                                            <li><a href="index-2.html">Home Style Default</a></li>
-                                            <li><a href="index-3.html">Home Style Two</a></li>
-                                            <li><a href="index-4.html">Home Style Three</a></li>
-                                            <li><a href="index-box.html">Home Box Style</a></li>
-                                        </ul>
-                                    </div>
+                                <li class=""><a href="index.php">Home</a>
                                 </li>
-                                <li class="drop"><a href="#">Shop</a>
-                                    <div class="megamenu mega03">
-                                        <ul class="item item03">
-                                            <li class="title">Shop Layout</li>
-                                            <li><a href="shop-grid.html">Shop Grid</a></li>
-                                            <li><a href="shop-list.html">Shop List</a></li>
-                                            <li><a href="shop-left-sidebar.html">Shop Left Sidebar</a></li>
-                                            <li><a href="shop-right-sidebar.html">Shop Right Sidebar</a></li>
-                                            <li><a href="shop-no-sidebar.html">Shop No sidebar</a></li>
-                                            <li><a href="single-product.html">Single Product</a></li>
-                                        </ul>
-                                        <ul class="item item03">
-                                            <li class="title">Shop Page</li>
-                                            <li><a href="my-account.html">My Account</a></li>
-                                            <li><a href="cart.html">Cart Page</a></li>
-                                            <li><a href="checkout.html">Checkout Page</a></li>
-                                            <li><a href="wishlist.html">Wishlist Page</a></li>
-                                            <li><a href="error404.html">404 Page</a></li>
-                                            <li><a href="faq.html">Faq Page</a></li>
-                                        </ul>
-                                        <ul class="item item03">
-                                            <li class="title">Bargain Books</li>
-                                            <li><a href="shop-grid.html">Bargain Bestsellers</a></li>
-                                            <li><a href="shop-grid.html">Activity Kits</a></li>
-                                            <li><a href="shop-grid.html">B&N Classics</a></li>
-                                            <li><a href="shop-grid.html">Books Under $5</a></li>
-                                            <li><a href="shop-grid.html">Bargain Books</a></li>
-                                        </ul>
-                                    </div>
+                                <li class=""><a href="#">Shop</a>
                                 </li>
                                 <li class="drop"><a href="shop-grid.html">Books</a>
                                     <div class="megamenu mega03">
@@ -84,58 +48,8 @@
                                         </ul>
                                     </div>
                                 </li>
-                                <li class="drop"><a href="shop-grid.html">Kids</a>
-                                    <div class="megamenu mega02">
-                                        <ul class="item item02">
-                                            <li class="title">Top Collections</li>
-                                            <li><a href="shop-grid.html">American Girl</a></li>
-                                            <li><a href="shop-grid.html">Diary Wimpy Kid</a></li>
-                                            <li><a href="shop-grid.html">Finding Dory</a></li>
-                                            <li><a href="shop-grid.html">Harry Potter</a></li>
-                                            <li><a href="shop-grid.html">Land of Stories</a></li>
-                                        </ul>
-                                        <ul class="item item02">
-                                            <li class="title">More For Kids</li>
-                                            <li><a href="shop-grid.html">B&N Educators</a></li>
-                                            <li><a href="shop-grid.html">B&N Kids' Club</a></li>
-                                            <li><a href="shop-grid.html">Kids' Music</a></li>
-                                            <li><a href="shop-grid.html">Toys & Games</a></li>
-                                            <li><a href="shop-grid.html">Hoodies</a></li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                <li class="drop"><a href="#">Pages</a>
-                                    <div class="megamenu dropdown">
-                                        <ul class="item item01">
-                                            <li><a href="about.html">About Page</a></li>
-                                            <li class="label2"><a href="portfolio.html">Portfolio</a>
-                                                <ul>
-                                                    <li><a href="portfolio.html">Portfolio</a></li>
-                                                    <li><a href="portfolio-three-column.html">Portfolio 3 Column</a>
-                                                    </li>
-                                                    <li><a href="portfolio-details.html">Portfolio Details</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="my-account.html">My Account</a></li>
-                                            <li><a href="cart.html">Cart Page</a></li>
-                                            <li><a href="checkout.html">Checkout Page</a></li>
-                                            <li><a href="wishlist.html">Wishlist Page</a></li>
-                                            <li><a href="error404.html">404 Page</a></li>
-                                            <li><a href="faq.html">Faq Page</a></li>
-                                            <li><a href="team.html">Team Page</a></li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                <li class="drop"><a href="blog.html">Blog</a>
-                                    <div class="megamenu dropdown">
-                                        <ul class="item item01">
-                                            <li><a href="blog.html">Blog Page</a></li>
-                                            <li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
-                                            <li><a href="blog-no-sidebar.html">Blog No Sidebar</a></li>
-                                            <li><a href="blog-details.html">Blog Details</a></li>
-                                        </ul>
-                                    </div>
-                                </li>
+                                <li><a href="Competions.php">Events</a></li>
+                                <li><a href="contact.html">About</a></li>
                                 <li><a href="contact.html">Contact</a></li>
                             </ul>
                         </nav>
@@ -243,12 +157,11 @@
                                             <div class="switcher-options">
                                                 <div class="switcher-currency-trigger">
                                                     <div class="setting__menu">
-                                                        <span><a href="#">My Account</a></span>
-                                                        <span><a href="#">My Wishlist</a></span>
                                                         <?php if (isset($_SESSION['user'])) {
                                                             // get current page url
                                                             $current_page = $_SERVER['REQUEST_URI'];
                                                         ?>
+                                                            <span><a href="#">My Account</a></span>
                                                             <span><a href="logout.php?redirect=<?= $current_page ?>">Logout</a></span>
                                                         <?php
                                                         } else { ?>
