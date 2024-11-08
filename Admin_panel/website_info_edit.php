@@ -1,7 +1,7 @@
 <?php
 include 'header.php';
 include 'body_start.php';
-$data = mysqli_fetch_assoc(mysqli_query(connection(), "SELECT * FROM `website`"));
+
 ?>
 <!--start page wrapper -->
 <div class="page-wrapper">
@@ -33,7 +33,7 @@ $data = mysqli_fetch_assoc(mysqli_query(connection(), "SELECT * FROM `website`")
 											<h6 class="mb-0">Name</h6>
 										</div>
 										<div class="col-sm-9">
-											<input type="text" name="website_name" class="form-control bg-transparent" value="<?php echo $data['name']; ?>" />
+											<input type="text" name="website_name" class="form-control bg-transparent" value="<?php echo $website['name']; ?>" />
 										</div>
 									</div>
 									<div class="row mb-3">
@@ -41,7 +41,7 @@ $data = mysqli_fetch_assoc(mysqli_query(connection(), "SELECT * FROM `website`")
 											<h6 class="mb-0">Email</h6>
 										</div>
 										<div class="col-sm-9">
-											<input type="text" name="website_email" class="form-control bg-transparent" value="<?php echo $data['email']; ?>" />
+											<input type="text" name="website_email" class="form-control bg-transparent" value="<?php echo $website['email']; ?>" />
 										</div>
 									</div>
 									<div class="row mb-3">
@@ -49,7 +49,7 @@ $data = mysqli_fetch_assoc(mysqli_query(connection(), "SELECT * FROM `website`")
 											<h6 class="mb-0">Phone</h6>
 										</div>
 										<div class="col-sm-9">
-											<input type="text" name="website_phone" class="form-control bg-transparent" value="<?php echo $data['phone']; ?>" />
+											<input type="text" name="website_phone" class="form-control bg-transparent" value="<?php echo $website['phone']; ?>" />
 										</div>
 									</div>
 									<div class="row mb-3">
@@ -57,7 +57,7 @@ $data = mysqli_fetch_assoc(mysqli_query(connection(), "SELECT * FROM `website`")
 											<h6 class="mb-0">Address</h6>
 										</div>
 										<div class="col-sm-9">
-											<input type="text" name="website_address" class="form-control bg-transparent" value="<?php echo $data['address']; ?>" />
+											<input type="text" name="website_address" class="form-control bg-transparent" value="<?php echo $website['address']; ?>" />
 										</div>
 									</div>
 									<div class="row mb-3">
@@ -65,7 +65,7 @@ $data = mysqli_fetch_assoc(mysqli_query(connection(), "SELECT * FROM `website`")
 											<h6 class="mb-0">Website</h6>
 										</div>
 										<div class="col-sm-9">
-											<input type="text" name="website_link" class="form-control bg-transparent" value="<?php echo $data['website_link']; ?>" />
+											<input type="text" name="website_link" class="form-control bg-transparent" value="<?php echo $website['website_link']; ?>" />
 										</div>
 									</div>
 									<div class="row mb-3">
@@ -73,7 +73,7 @@ $data = mysqli_fetch_assoc(mysqli_query(connection(), "SELECT * FROM `website`")
 											<h6 class="mb-0">Facebook</h6>
 										</div>
 										<div class="col-sm-9">
-											<input type="text" name="website_facebook" class="form-control bg-transparent" value="<?php echo $data['facebook']; ?>" />
+											<input type="text" name="website_facebook" class="form-control bg-transparent" value="<?php echo $website['facebook']; ?>" />
 										</div>
 									</div>
 									<div class="row mb-3">
@@ -81,7 +81,7 @@ $data = mysqli_fetch_assoc(mysqli_query(connection(), "SELECT * FROM `website`")
 											<h6 class="mb-0">Instagram</h6>
 										</div>
 										<div class="col-sm-9">
-											<input type="text" name="website_instagram" class="form-control bg-transparent" value="<?php echo $data['instagram']; ?>" />
+											<input type="text" name="website_instagram" class="form-control bg-transparent" value="<?php echo $website['instagram']; ?>" />
 										</div>
 									</div>
 									<div class="row mb-3">
@@ -89,7 +89,7 @@ $data = mysqli_fetch_assoc(mysqli_query(connection(), "SELECT * FROM `website`")
 											<h6 class="mb-0">Whatsapp</h6>
 										</div>
 										<div class="col-sm-9">
-											<input type="text" name="website_whatsapp" class="form-control bg-transparent" value="<?php echo $data['whatsapp']; ?>" />
+											<input type="text" name="website_whatsapp" class="form-control bg-transparent" value="<?php echo $website['whatsapp']; ?>" />
 										</div>
 									</div>
 									<div class="row mb-3">
@@ -97,7 +97,7 @@ $data = mysqli_fetch_assoc(mysqli_query(connection(), "SELECT * FROM `website`")
 											<h6 class="mb-0">Info</h6>
 										</div>
 										<div class="col-sm-9">
-											<textarea name="website_info" class="form-control bg-transparent" rows="5"><?php echo $data['info']; ?></textarea>
+											<textarea name="website_info" class="form-control bg-transparent" rows="5"><?php echo $website['info']; ?></textarea>
 										</div>
 									</div>
 									<div class="container-fluid mt-5">

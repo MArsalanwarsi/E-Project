@@ -5,10 +5,10 @@
         <div class="sidebar-wrapper" data-simplebar="true">
             <div class="sidebar-header">
                 <div>
-                    <img src="assets/images/logo-icon.png" class="logo-icon" alt="logo icon">
+                    <img src="../Images/main_images/<?php echo $website['logo']; ?>" class="logo-icon" alt="logo icon">
                 </div>
                 <div>
-                    <h4 class="logo-text">E-Shelf</h4>
+                    <h4 class="logo-text"><?php echo  $website['name']  ?></h4>
                 </div>
                 <div class="toggle-icon ms-auto"><i class='bx bx-arrow-to-left'></i>
                 </div>
@@ -71,6 +71,20 @@
                         </li>
                     </ul>
                 </li>
+                <li class="menu-label">Events</li>
+                <li>
+                    <a href="javascript:;" class="has-arrow">
+                        <div class="parent-icon"><i class='bx bx-user'></i>
+                        </div>
+                        <div class="menu-title">Events</div>
+                    </a>
+                    <ul>
+                        <li> <a href="All_Events.php"><i class="bx bx-right-arrow-alt"></i>All Events</a>
+                        </li>
+                        <li> <a href="Add_New_Event.php"><i class="bx bx-right-arrow-alt"></i>Add New Event</a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="menu-label">Managment</li>
                 <li>
                     <a href="javascript:;" class="has-arrow">
@@ -116,7 +130,7 @@
                     </div>
                     <div class="search-bar flex-grow-1">
                         <div class="position-relative search-bar-box">
-                            <input type="text" class="form-control search-control" placeholder="Type to search..."> <span class="position-absolute top-50 search-show translate-middle-y"><i class='bx bx-search'></i></span>
+                            <input type="search" class="form-control search-control" placeholder="Type to search..."> <span class="position-absolute top-50 search-show translate-middle-y"><i class='bx bx-search'></i></span>
                             <span class="position-absolute top-50 search-close translate-middle-y"><i class='bx bx-x'></i></span>
                         </div>
                     </div>

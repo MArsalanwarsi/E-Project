@@ -19,45 +19,25 @@ if (isset($_POST['admin_email'])) {
 // .......... add category ................
 if (isset($_POST['book_Category'])) {
     $category_name = $_POST['book_Category'];
-    $category_image = $_FILES['category_image']['name'];
     // validation
-    if (empty($category_name) || empty($category_image)) {
+    if (empty($category_name)) {
         echo "<div class='alert border-0 alert-dismissible fade show py-2'><div class='d-flex align-items-center'><div class='font-35 text-danger'><i class='bx bxs-message-square-x'></i></div><div class='ms-3'><h6 class='mb-0 text-white'>All Fields are required</h6></div></div><button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
     } else {
-        $category_image_temp = $_FILES['category_image']['tmp_name'];
-        $category_image_folder = '../images/category_images/' . $category_image;
-        // check if destination folder has file of same name
-        if (file_exists($category_image_folder)) {
-            echo "<div class='alert border-0 alert-dismissible fade show py-2'><div class='d-flex align-items-center'><div class='font-35 text-danger'><i class='bx bxs-message-square-x'></i></div><div class='ms-3'><h6 class='mb-0 text-white'>A file with the same name already exists in the destination folder. Please rename the file and try again.</h6></div></div><button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+        $sql = "INSERT INTO categories (category_name) VALUES ('$category_name')";
+        $result = mysqli_query(connection(), $sql);
+        if ($result) {
+            echo "<div class='alert border-0 alert-dismissible fade show py-2'><div class='d-flex align-items-center'><div class='font-35 text-success'><i class='bx bxs-check-circle'></i></div><div class='ms-3'><h6 class='mb-0 text-white'>Category Added Successfully</h6></div></div><button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
         } else {
-            if (move_uploaded_file($category_image_temp, $category_image_folder)) {
-                $sql = "INSERT INTO categories (category_name, category_image) VALUES ('$category_name', '$category_image')";
-                $result = mysqli_query(connection(), $sql);
-                if ($result) {
-                    echo "<div class='alert border-0 alert-dismissible fade show py-2'><div class='d-flex align-items-center'><div class='font-35 text-success'><i class='bx bxs-check-circle'></i></div><div class='ms-3'><h6 class='mb-0 text-white'>Category Added Successfully</h6></div></div><button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
-                } else {
-                    echo "<div class='alert border-0 alert-dismissible fade show py-2'><div class='d-flex align-items-center'><div class='font-35 text-danger'><i class='bx bxs-message-square-x'></i></div><div class='ms-3'><h6 class='mb-0 text-white'>Filed to Add Category. Please Try Again</h6></div></div><button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
-                }
-            } else {
-                echo "<div class='alert border-0 alert-dismissible fade show py-2'><div class='d-flex align-items-center'><div class='font-35 text-danger'><i class='bx bxs-message-square-x'></i></div><div class='ms-3'><h6 class='mb-0 text-white'>Filed to Add Category. Please Try Again</h6></div></div><button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
-            }
+            echo "<div class='alert border-0 alert-dismissible fade show py-2'><div class='d-flex align-items-center'><div class='font-35 text-danger'><i class='bx bxs-message-square-x'></i></div><div class='ms-3'><h6 class='mb-0 text-white'>Filed to Add Category. Please Try Again</h6></div></div><button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
         }
     }
 }
 // ........... delete category .............
 if (isset($_POST['category_id'])) {
     $category_id = $_POST['category_id'];
-    // delete image from folder
-    $sql = "SELECT category_image FROM categories WHERE id = '$category_id'";
-    $result = mysqli_query(connection(), $sql);
-    $data = mysqli_fetch_assoc($result);
-    $image_path = '../images/category_images/' . $data['category_image'];
     $sql = "DELETE FROM categories WHERE id = '$category_id'";
     $result = mysqli_query(connection(), $sql);
     if ($result) {
-        if (file_exists($image_path)) {
-            unlink($image_path);
-        }
         echo "<div class='alert border-0 alert-dismissible fade show py-2'><div class='d-flex align-items-center'><div class='font-35 text-success'><i class='bx bxs-check-circle'></i></div><div class='ms-3'><h6 class='mb-0 text-white'>Category Deleted Successfully</h6></div></div><button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
     } else {
         echo "<div class='alert border-0 alert-dismissible fade show py-2'><div class='d-flex align-items-center'><div class='font-35 text-danger'><i class='bx bxs-message-square-x'></i></div><div class='ms-3'><h6 class='mb-0 text-white'>Failed to Delete Category. Please Try Again</h6></div></div><button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
@@ -68,30 +48,12 @@ if (isset($_POST['category_id'])) {
 if (isset($_POST['book_Category_update'])) {
     $category_id = $_POST['id'];
     $category_name = $_POST['book_Category_update'];
-    $category_image = $_FILES['category_image_update']['name'];
     // validation
     if (empty($category_name)) {
         echo "<div class='alert border-0 alert-dismissible fade show py-2'><div class='d-flex align-items-center'><div class='font-35 text-danger'><i class='bx bxs-message-square-x'></i></div><div class='ms-3'><h6 class='mb-0 text-white'>Category Name is required</h6></div></div><button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
     } else {
-        if (empty($category_image)) {
-            $sql = "UPDATE categories SET category_name = '$category_name' WHERE id = '$category_id'";
-        } else {
-            // delete old image from folder
-            $sql = "SELECT category_image FROM categories WHERE id = '$category_id'";
-            $result = mysqli_query(connection(), $sql);
-            $data = mysqli_fetch_assoc($result);
-            $oldimage_path = '../images/category_images/' . $data['category_image'];
-            // upload new image
-            $category_image_temp = $_FILES['category_image_update']['tmp_name'];
-            $category_image_folder = '../images/category_images/' . $category_image;
-            if (move_uploaded_file($category_image_temp, $category_image_folder)) {
-                $sql = "UPDATE categories SET category_name = '$category_name', category_image = '$category_image' WHERE id = '$category_id'";
-                if (file_exists($oldimage_path)) {
-                    unlink($oldimage_path);
-                }
-            }
-            //   execute query
-        }
+        $sql = "UPDATE categories SET category_name = '$category_name' WHERE id = '$category_id'";
+
         $result = mysqli_query(connection(), $sql);
         if ($result) {
             echo "<div class='alert border-0 alert-dismissible fade show py-2'><div class='d-flex align-items-center'><div class='font-35 text-success'><i class='bx bxs-check-circle'></i></div><div class='ms-3'><h6 class='mb-0 text-white'>Category Updated Successfully</h6></div></div><button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
@@ -278,7 +240,7 @@ if (isset($_POST['logo_data'])) {
             $sql = "UPDATE website SET logo='$logo' WHERE id = '1'";
             $result = mysqli_query(connection(), $sql);
             if ($result) {
-                unlink("../Images/main_images/" . $olddata['logo_image']);
+                unlink("../Images/main_images/" . $olddata['logo']);
                 if (move_uploaded_file($_FILES['logo_image_update']['tmp_name'], "../Images/main_images/" . $logo)) {
                     echo "success";
                 } else {
@@ -341,6 +303,49 @@ if (isset($_POST['add_admin_name'])) {
         if ($result) {
             echo "success";
         } else {
+            echo "failed";
+        }
+    }
+}
+
+
+// ............add events..............
+
+if (isset($_POST['event_title'])) {
+    $event_title = $_POST['event_title'];
+    $event_description = $_POST['event_description'];
+    $event_description = mysqli_real_escape_string(connection(), $event_description);
+    $event_start = $_POST['event_start'];
+    $event_end = $_POST['event_end'];
+    $event_req1 = $_POST['event_req1'];
+    $event_req2 = $_POST['event_req2'];
+    $event_req3 = $_POST['event_req3'];
+    $event_req4 = $_POST['event_req4'];
+    $event_req1 = mysqli_real_escape_string(connection(), $event_req1);
+    $event_req2 = mysqli_real_escape_string(connection(), $event_req2);
+    $event_req3 = mysqli_real_escape_string(connection(), $event_req3);
+    $event_req4 = mysqli_real_escape_string(connection(), $event_req4);
+    $image = $_FILES['front_image']['name'];
+    $extentions = array("jpg", "jpeg", "png", "webp", "JPG", "JPEG", "PNG", "WEBP");
+
+    if (empty($event_title) || empty($event_description) || empty($event_start) || empty($event_end) || empty($event_req1) || empty($image)) {
+        echo "missing";
+    } else if (!in_array(strtolower(pathinfo($image, PATHINFO_EXTENSION)), $extentions)) {
+        echo "extention_error";
+    } else {
+        $image_name = $image;
+        $image_size = $_FILES['front_image']['size'];
+        $image_tmp = $_FILES['front_image']['tmp_name'];
+        $image_folder = "../Images/events_images/" . $image_name;
+        if (move_uploaded_file($image_tmp, $image_folder)) {
+            $sql = "INSERT INTO events (event_title, event_description, event_start, event_end, event_req1, event_req2, event_req3, event_req4, event_img) VALUES ('$event_title', '$event_description', '$event_start', '$event_end', '$event_req1', '$event_req2', '$event_req3', '$event_req4', '$image_name')";
+            $result = mysqli_query(connection(), $sql);
+            if ($result) {
+                echo "success";
+            } else {
+                echo "failed";
+            }
+        }else{
             echo "failed";
         }
     }

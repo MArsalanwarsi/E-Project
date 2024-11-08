@@ -759,11 +759,11 @@ ol.list-num li:after {
 	}
 }
 
-.breadcrumb > .active {
+/* .breadcrumb > .active {
 	color: inherit;
 	color: #e43d4e;
 	opacity: 0.9;
-}
+} */
 
 .breadcrumb-item + .breadcrumb-item::before {
 	color: inherit;
@@ -775,12 +775,10 @@ input[type="text"],
 input[type="email"],
 input[type="url"],
 input[type="password"],
-input[type="search"],
 input[type="tel"],
 input[type="number"],
 textarea,
-select,
-.form-control {
+select {
 	background-color: transparent;
 	border: none;
 	color: #0a0d1b;
@@ -1079,7 +1077,6 @@ input[type="radio"]:disabled + label:before {
 .contact-form.form-inverse input[type="email"],
 .contact-form.form-inverse input[type="url"],
 .contact-form.form-inverse input[type="password"],
-.contact-form.form-inverse input[type="search"],
 .contact-form.form-inverse input[type="tel"],
 .contact-form.form-inverse input[type="number"],
 .contact-form.form-inverse textarea,
@@ -1100,66 +1097,6 @@ input[type="radio"]:disabled + label:before {
 	max-width: 10px;
 }
 
-/* bootstrap tabs*/
-.nav-tabs {
-	border-bottom: none;
-}
-
-@media (max-width: 450px) {
-	.nav-tabs {
-		display: flex;
-		flex-direction: column;
-	}
-}
-
-.nav-tabs .nav-link {
-	border: 2px solid #e1e1e1;
-	border-radius: 0;
-	color: #a4a9b9 !important;
-	font-size: 15px;
-	font-weight: 400;
-	letter-spacing: 0.1px;
-	margin-right: 4px;
-}
-
-.nav-tabs .nav-link:hover {
-	color: #fff !important;
-}
-
-.nav-tabs .nav-item.show .nav-link,
-.nav-tabs .nav-link.active {
-	background: #e43d4e;
-	border-color: #e43d4e !important;
-	color: #fff !important;
-}
-
-.nav-link {
-	color: #13182a;
-	font-family: "Oswald", sans-serif;
-	font-size: 12px;
-	font-style: normal;
-	font-weight: 600;
-	letter-spacing: -0.05em;
-	line-height: 1;
-	min-width: 170px;
-	padding: 22px 28px 22px;
-	text-align: center;
-	text-transform: uppercase;
-}
-
-@media (max-width: 768px) {
-	.nav-link {
-		min-width: 100px;
-	}
-}
-
-@media (max-width: 450px) {
-	.nav-link {
-		display: block;
-		min-width: auto;
-		width: 100%;
-	}
-}
 
 .small-tabs .nav-link {
 	color: #a4a9b9 !important;
@@ -8612,7 +8549,6 @@ blockquote.vertical-item .small-text {
 .ls.ms input[type="email"],
 .ls.ms input[type="url"],
 .ls.ms input[type="password"],
-.ls.ms input[type="search"],
 .ls.ms input[type="tel"],
 .ls.ms input[type="number"],
 .ls.ms textarea,
@@ -8625,7 +8561,6 @@ blockquote.vertical-item .small-text {
 .ls.ms .hero-bg input[type="email"],
 .ls.ms .hero-bg input[type="url"],
 .ls.ms .hero-bg input[type="password"],
-.ls.ms .hero-bg input[type="search"],
 .ls.ms .hero-bg input[type="tel"],
 .ls.ms .hero-bg input[type="number"],
 .ls.ms .hero-bg textarea,
@@ -9015,7 +8950,6 @@ blockquote.vertical-item .small-text {
 .ds input[type="email"],
 .ds input[type="url"],
 .ds input[type="password"],
-.ds input[type="search"],
 .ds input[type="tel"],
 .ds input[type="number"],
 .ds textarea,
@@ -9029,7 +8963,6 @@ blockquote.vertical-item .small-text {
 .ds.ms input[type="email"],
 .ds.ms input[type="url"],
 .ds.ms input[type="password"],
-.ds.ms input[type="search"],
 .ds.ms input[type="tel"],
 .ds.ms input[type="number"],
 .ds.ms textarea,
@@ -9464,7 +9397,6 @@ blockquote.vertical-item .small-text {
 .cs input[type="email"],
 .cs input[type="url"],
 .cs input[type="password"],
-.cs input[type="search"],
 .cs input[type="tel"],
 .cs input[type="number"],
 .cs textarea,

@@ -90,25 +90,6 @@ include 'body_start.php';
 										<label for="inputBookCategory" class="form-label">Book Category <span class="text-warning">(Required)</span></label>
 										<input type="text" class="form-control" id="inputBookCategory" placeholder="Enter Book Category" name="book_Category">
 									</div>
-									<div class="mb-3">
-										<label for="inputBookDescription" class="form-label">Category Images <span class="text-warning">(Required)</span></label>
-										<div class="container">
-											<div class="row justify-content-start">
-												<div class="col-12 col-sm-12 col-md-12 p-3">
-													<div class="form-group">
-														<input type="file" name="category_image" id="file" class="input-file">
-														<label for="file" class="btn btn-tertiary js-labelFile">
-															<i class="icon fa fa-check"></i>
-															<span class="js-fileName">Choose Category image</span>
-														</label>
-													</div>
-												</div>
-											</div>
-
-
-										</div>
-
-									</div>
 									<div class="mb-3 d-flex justify-content-end">
 										<div class="d-grid">
 											<input type="submit" class="btn btn-light px-5 py-2" name="add_category" value="Save Category" style="max-width: 200px;">
@@ -133,24 +114,6 @@ include 'footer.php';
 ?>
 <script>
 	$(document).ready(function() {
-		(function() {
-
-			'use strict';
-
-			$('.input-file').each(function() {
-				var $input = $(this),
-					$label = $input.next('.js-labelFile'),
-					labelVal = $label.html();
-
-				$input.on('change', function(element) {
-					var fileName = '';
-					if (element.target.value) fileName = element.target.value.split('\\').pop();
-					fileName ? $label.addClass('has-file').find('.js-fileName').html(fileName) : $label.removeClass('has-file').html(labelVal);
-				});
-			});
-
-		})();
-
 		// using ajax send data to code.php after validation on submit
 		$('#category_form').submit(function(e) {
 
