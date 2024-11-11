@@ -1,6 +1,7 @@
 <?php
 session_start();
 include_once "../config.php";
+$website=mysqli_fetch_assoc(mysqli_query(connection(), "SELECT * FROM website WHERE id = '1'"));
 ?>
 <!doctype html>
 <html lang="en">
@@ -10,7 +11,7 @@ include_once "../config.php";
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!--favicon-->
-	<link rel="icon" href="assets/images/favicon-32x32.png" type="image/png" />
+	<link rel="icon" href="../Images/main_images/<?php echo $website['logo']; ?>" type="image/png" />
 	<!--plugins-->
 	<link href="assets/plugins/simplebar/css/simplebar.css" rel="stylesheet" />
 	<link href="assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" />
@@ -32,11 +33,12 @@ include_once "../config.php";
 		<header class="login-header shadow">
 			<nav class="navbar navbar-expand-lg navbar-light bg-dark rounded fixed-top rounded-0 shadow-sm">
 				<div class="container-fluid">
-					<a class="navbar-brand" href="#">
-						<img src="assets/images/logo-img.png" width="140" alt="" />
+					<a class="navbar-brand d-flex gap-2 align-items-center" href="#">
+						<img src="../Images/main_images/<?php echo $website['logo']; ?>" width="40" alt="" />
+						<h4 class="mb-0 text-white"><?php echo $website['name']; ?></h4>
 					</a>
 					<ul class="navbar-nav ms-auto mb-2 mb-lg-0 fs-6">
-						<li class="nav-item"> <a class="nav-link text-white" aria-current="page" href="#"><i class='bx bx-home-alt me-1'></i>Home</a>
+						<li class="nav-item"> <a class="nav-link text-white" aria-current="page" href="../index.php"><i class='bx bx-home-alt me-1'></i>Home</a>
 						</li>
 					</ul>
 				</div>

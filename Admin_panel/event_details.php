@@ -6,6 +6,24 @@ include 'header.php';
 <link rel="stylesheet" href="../css/main.css">
 <?php
 include 'body_start.php';
+$data = mysqli_fetch_assoc(mysqli_query(connection(), "SELECT * FROM events WHERE id='$_GET[id]'"));
+function datatime($dt)
+{
+	$start_datetime_str = $dt;
+
+	// Create a DateTime object
+	$start_datetime = new DateTime($start_datetime_str);
+
+	// Extract date and time components
+	$start_date = $start_datetime->format('Y-m-d'); // 2024-11-08
+	$start_time = $start_datetime->format('H:i');     // 08:28
+	// convert into am pm format
+	$start_time = date('h:i A', strtotime($start_time));
+	// change date format to dd-mm-yy
+	$start_date = date('d-m-Y', strtotime($start_date));
+
+	return $start_date . ' ' . $start_time;
+}
 ?>
 <!--start page wrapper -->
 <div class="page-wrapper">
@@ -28,8 +46,6 @@ include 'body_start.php';
 		<form action="" method="POST" enctype="multipart/form-data" id="category_form">
 			<div class="card">
 				<div class="card-body p-4">
-					<h5 class="card-title">Add New Category</h5>
-					<hr />
 					<div class="alerts_ajax">
 
 					</div>
@@ -39,39 +55,74 @@ include 'body_start.php';
 								<div class="border border-3 p-4 rounded">
 									<article class="vertical-item content-padding post type-event status-publish format-standard has-post-thumbnail ">
 										<div class="item-media post-thumbnail p-5" style="max-height: 500px;">
-											<img src="../Images/image.png" alt="" />
+											<img src="../Images/events_images/<?php echo $data['event_img'] ?>" alt="" />
 										</div>
 
 										<div class="item-content">
 											<!-- .post-thumbnail -->
 											<header class="entry-header">
 												<div class="entry-meta mb-5">
-													<div class="entry-date">
-														<i class="fa fa-calendar color-main"></i> <span>Start:</span> <span>March 12, 2018</span>
-													</div>
-													<div class="entry-categories">
-														<i class="fa fa-calendar color-main"></i> <span>End:</span> <span>March 12, 2018</span>
-													</div>
+													<?php if ($data['status'] == 'ongoing') { ?>
+														<div class="entry-date" style="line-height: 20px;">
+															<i class="fa fa-calendar color-main"></i> <span class="h6">Start:</span>
+															<span><?php echo datatime($data['event_start']) ?></span>
+														</div>
+														<div class="entry-categories" style="line-height: 20px;">
+															<i class="fa fa-calendar color-main"></i> <span class="h6">End:</span>
+															<span><?php echo datatime($data['event_end']) ?></span>
+														</div>
+													<?php } else { ?>
+														<div class="entry-date h3" style="line-height: 20px;">
+															<i class="fa fa-calendar color-main "></i> <span class="h3">Finished</span>
+														</div>
+													<?php } ?>
 												</div>
 												<!-- .entry-meta -->
 											</header>
 											<!-- .entry-header -->
 
 											<div class="entry-content">
-												<p>At vero eos accusam justo duo dolores et rebum clita kasd gubergren nosea takimata sanctus est dolor sit amet</p>
-
-												<p>At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor amet consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt.</p>
+												<p><?php echo $data['event_description'] ?></p>
 												<h4>Requirements</h4>
 												<ul class="list-styled">
-													<li>Consetetur sadipscing elitr, sed diam nonumy</li>
-													<li>Eirmod tempor invidunt ut labore</li>
-													<li>Dolore magna aliquyam erat</li>
-													<li>Sed diam voluptua. At vero eos accusam</li>
+													<li><?php echo $data['event_req1'] ?></li>
+													<?php if ($data['event_req2'] != null || $data['event_req2'] != "") { ?><li><?php echo $data['event_req2'] ?></li> <?php } ?>
+													<?php if ($data['event_req3'] != null || $data['event_req3'] != "") { ?><li><?php echo $data['event_req3'] ?></li> <?php } ?>
+													<?php if ($data['event_req4'] != null || $data['event_req4'] != "") { ?><li><?php echo $data['event_req4'] ?></li> <?php } ?>
+
 												</ul>
 											</div>
+											<div class="entry-content">
+												<h4>REWARDS</h4>
+												<p><?php echo $data['rewards'] ?></p>
+											</div>
 											<!-- .entry-content -->
-											<div class="d-flex justify-content-end mt-5">
-												<a href="participate.php" class="btn btn-outline-danger">Show Participants</a>
+											<div class="d-flex flex-wrap justify-content-end gap-4 mt-5">
+
+												<a href="Update_Event.php?id=<?php echo $data['id'] ?>" class="btn btn-outline-warning">Edit</a>
+												<a class="btn btn-outline-danger" id="delete_btn_main" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</a>
+
+												<a href="show_participants.php?id=<?php echo $data['id'] ?>" class="btn btn-outline-success">Show Participants</a>
+											</div>
+											<div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+												<div class="modal-dialog modal-lg modal-dialog-centered">
+													<div class="modal-content bg-danger">
+														<div class="modal-header">
+															<h5 class="modal-title text-white">Delete Event</h5>
+															<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+														</div>
+														<div class="modal-body text-white">
+															<p>Are you sure you want to delete?</p>
+															<p>This will permanently delete the event and data of all participants in this event.</p>
+															<p>This action cannot be undone</p>
+
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+															<button type="button" class="btn btn-dark deletebtn" data-id="<?php echo $data['id']; ?>">Delete</button>
+														</div>
+													</div>
+												</div>
 											</div>
 										</div>
 										<!-- .item-content -->
@@ -94,5 +145,34 @@ include 'body_start.php';
 include 'body_end.php';
 include 'footer.php';
 ?>
-<!--app JS-->
-<
+<script>
+	$(document).ready(function() {
+		$('.deletebtn').on('click', function() {
+			$delete_btn = $(this);
+			$delete_btn.prop('disabled', true);
+			$delete_btn.html("Deleting...");
+			var event_id = $(this).data('id');
+			$.ajax({
+				url: 'code.php',
+				method: 'POST',
+				data: {
+					event_id: event_id
+				},
+				success: function(data) {
+					if (data == "success") {
+						$delete_btn.html("Deleted");
+						setTimeout(function() {
+							location.assign("All_Events.php");
+						}, 2000);
+					} else {
+						alert(data);
+						$delete_btn.prop('disabled', false);
+						$delete_btn.html("Delete");
+					}
+
+
+				}
+			})
+		})
+	})
+</script>

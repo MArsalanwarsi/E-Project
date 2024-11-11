@@ -23,3 +23,15 @@ foreach ($otp_invaldi as $row) {
         mysqli_query(connection(), "DELETE FROM OTP WHERE email='$email'");
     }
 }
+
+$event_time = mysqli_query(connection(), "SELECT * FROM events where status='ongoing'");
+foreach ($event_time as $row) {
+    $time = $row['event_end'];
+    $event_id = $row['id'];
+    // change timezone to pakistan
+    date_default_timezone_set('Asia/Karachi');
+    // if event end time reached change status to finished
+    if ($time <= date('Y-m-d H:i s')) {
+        mysqli_query(connection(), "UPDATE events SET status='finished' WHERE id='$event_id'");
+    }
+}

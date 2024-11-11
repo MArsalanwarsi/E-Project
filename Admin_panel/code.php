@@ -313,6 +313,8 @@ if (isset($_POST['add_admin_name'])) {
 
 if (isset($_POST['event_title'])) {
     $event_title = $_POST['event_title'];
+    $event_rewards = $_POST['event_rewards'];
+    $event_rewards = mysqli_real_escape_string(connection(), $event_rewards);
     $event_description = $_POST['event_description'];
     $event_description = mysqli_real_escape_string(connection(), $event_description);
     $event_start = $_POST['event_start'];
@@ -328,25 +330,146 @@ if (isset($_POST['event_title'])) {
     $image = $_FILES['front_image']['name'];
     $extentions = array("jpg", "jpeg", "png", "webp", "JPG", "JPEG", "PNG", "WEBP");
 
-    if (empty($event_title) || empty($event_description) || empty($event_start) || empty($event_end) || empty($event_req1) || empty($image)) {
+    if (empty($event_title) || empty($event_description) || empty($event_start) || empty($event_end) || empty($event_req1) || empty($image) || empty($event_rewards)) {
         echo "missing";
     } else if (!in_array(strtolower(pathinfo($image, PATHINFO_EXTENSION)), $extentions)) {
         echo "extention_error";
     } else {
-        $image_name = $image;
-        $image_size = $_FILES['front_image']['size'];
-        $image_tmp = $_FILES['front_image']['tmp_name'];
-        $image_folder = "../Images/events_images/" . $image_name;
-        if (move_uploaded_file($image_tmp, $image_folder)) {
-            $sql = "INSERT INTO events (event_title, event_description, event_start, event_end, event_req1, event_req2, event_req3, event_req4, event_img) VALUES ('$event_title', '$event_description', '$event_start', '$event_end', '$event_req1', '$event_req2', '$event_req3', '$event_req4', '$image_name')";
+        if (file_exists("../Images/events_images/" . $image)) {
+            echo "exist";
+        } else {
+            $image_name = $image;
+            $image_size = $_FILES['front_image']['size'];
+            $image_tmp = $_FILES['front_image']['tmp_name'];
+            $image_folder = "../Images/events_images/" . $image_name;
+            if (move_uploaded_file($image_tmp, $image_folder)) {
+                $sql = "INSERT INTO events (event_title, event_description, event_start, event_end, event_req1, event_req2, event_req3, event_req4, event_img,rewards) VALUES ('$event_title', '$event_description', '$event_start', '$event_end', '$event_req1', '$event_req2', '$event_req3', '$event_req4', '$image_name','$event_rewards')";
+                $result = mysqli_query(connection(), $sql);
+                if ($result) {
+                    echo "success";
+                } else {
+                    echo "failed";
+                }
+            } else {
+                echo "failed";
+            }
+        }
+    }
+}
+
+// delete event
+if (isset($_POST['event_id'])) {
+    $event_id = $_POST['event_id'];
+    $participants = mysqli_query(connection(), "SELECT * FROM participants WHERE events_id = '$event_id'");
+    $event = mysqli_fetch_assoc(mysqli_query(connection(), "SELECT * FROM events WHERE id = '$event_id'"));
+    if (mysqli_num_rows($participants) > 0) {
+        foreach ($participants as $row) {
+            unlink("../event_files/participants_files/" . $row['story']);
+        }
+        $sql = "DELETE FROM participants WHERE events_id = '$event_id'";
+        $result = mysqli_query(connection(), $sql);
+        if ($result) {
+            $sql = "DELETE FROM events WHERE id = '$event_id'";
             $result = mysqli_query(connection(), $sql);
             if ($result) {
+                unlink("../Images/events_images/" . $event['event_img']);
                 echo "success";
             } else {
                 echo "failed";
             }
-        }else{
+        } else {
+            echo "failed";
+        }
+    } else {
+        $sql = "DELETE FROM events WHERE id = '$event_id'";
+        $result = mysqli_query(connection(), $sql);
+        if ($result) {
+            unlink("../Images/events_images/" . $event['event_img']);
+            echo "success";
+        } else {
             echo "failed";
         }
     }
+}
+
+// update event
+if (isset($_POST['update_event_title'])) {
+    $id = $_POST['event_update_id'];
+    $event_title = $_POST['update_event_title'];
+    $event_rewards = $_POST['update_event_rewards'];
+    $event_rewards = mysqli_real_escape_string(connection(), $event_rewards);
+    $event_description = $_POST['update_event_description'];
+    $event_description = mysqli_real_escape_string(connection(), $event_description);
+    $event_start = $_POST['update_event_start'];
+    $event_end = $_POST['update_event_end'];
+    if (isset($_POST['update_event_status'])) {
+        $eventStatus = $_POST['update_event_status'];
+
+        $sql = "UPDATE events SET status = '$eventStatus' WHERE id = '$id'";
+        $result = mysqli_query(connection(), $sql);
+        if (!$sql) {
+            echo "failed";
+        }
+    };
+    $event_req1 = $_POST['update_event_req1'];
+    $event_req2 = $_POST['update_event_req2'];
+    $event_req3 = $_POST['update_event_req3'];
+    $event_req4 = $_POST['update_event_req4'];
+    $event_req1 = mysqli_real_escape_string(connection(), $event_req1);
+    $event_req2 = mysqli_real_escape_string(connection(), $event_req2);
+    $event_req3 = mysqli_real_escape_string(connection(), $event_req3);
+    $event_req4 = mysqli_real_escape_string(connection(), $event_req4);
+    $image = $_FILES['update_front_image']['name'];
+    $extentions = array("jpg", "jpeg", "png", "webp", "JPG", "JPEG", "PNG", "WEBP");
+    $oldddata = mysqli_fetch_assoc(mysqli_query(connection(), "SELECT * FROM events WHERE id='$id'"));
+
+    if (empty($event_title) || empty($event_description) || empty($event_start) || empty($event_end) || empty($event_req1)  || empty($event_rewards)) {
+        echo "missing";
+    } else if (empty($image)) {
+        // UPDATE DATA
+        $sql = "UPDATE events SET event_title='$event_title', event_description='$event_description', event_start='$event_start', event_end='$event_end', event_req1='$event_req1', event_req2='$event_req2', event_req3='$event_req3', event_req4='$event_req4', rewards='$event_rewards' WHERE id='$id'";
+        $result = mysqli_query(connection(), $sql);
+        if ($result) {
+            echo "success";
+        } else {
+            echo "failed";
+        }
+    } else if (!in_array(strtolower(pathinfo($image, PATHINFO_EXTENSION)), $extentions)) {
+        echo "extention_error";
+    } else {
+        if (file_exists("../Images/events_images/" . $image)) {
+            echo "exist";
+        } else {
+            $image_name = $image;
+            $image_size = $_FILES['update_front_image']['size'];
+            $image_tmp = $_FILES['update_front_image']['tmp_name'];
+            $image_folder = "../Images/events_images/" . $image_name;
+            if (move_uploaded_file($image_tmp, $image_folder)) {
+                $sql = "UPDATE events SET event_title='$event_title', event_description='$event_description', event_start='$event_start', event_end='$event_end', event_req1='$event_req1', event_req2='$event_req2', event_req3='$event_req3', event_req4='$event_req4' , event_img='$image_name', rewards='$event_rewards' WHERE id='$id'";
+                $result = mysqli_query(connection(), $sql);
+                if ($result) {
+                    echo "success";
+                } else {
+                    echo "failed";
+                }
+            } else {
+                echo "failed";
+            }
+        }
+    }
+}
+
+
+// partipant status change
+if (isset($_POST['part_status_id'])) {
+    $id = $_POST['part_status_id'];
+    $status = $_POST['part_status'];
+    $sql = "UPDATE participants SET status = '$status' WHERE id = '$id'";
+    $result = mysqli_query(connection(), $sql);
+    if ($result) {
+        echo "success";
+    } else {
+        echo "failed";
+    }
+
 }

@@ -1,7 +1,16 @@
 <?php
 include 'header.php';
 include 'body_start.php';
-
+$data = mysqli_fetch_assoc(mysqli_query(connection(), "SELECT * FROM events WHERE id = '" . $_GET['id'] . "'"));
+if (!$data) {
+	// send to index page
+	echo "
+		<script>
+			window.location.href = 'index.php';
+		</script>
+	";
+	die();
+}
 ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
 <style>
@@ -67,7 +76,7 @@ include 'body_start.php';
 					<ol class="breadcrumb mb-0 p-0">
 						<li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
 						</li>
-						<li class="breadcrumb-item active" aria-current="page">Add New Event</li>
+						<li class="breadcrumb-item active" aria-current="page">Update Event</li>
 					</ol>
 				</nav>
 			</div>
@@ -85,8 +94,9 @@ include 'body_start.php';
 										<div class="col-sm-3">
 											<h6 class="mb-0">Title <span class="text-warning">*</span></h6>
 										</div>
+										<input type="hidden" name="event_update_id" value="<?php echo $data['id']; ?>">
 										<div class="col-sm-9">
-											<input type="text" name="event_title" class="form-control bg-transparent" />
+											<input type="text" name="update_event_title" class="form-control bg-transparent" value="<?php echo $data['event_title']; ?>" />
 										</div>
 									</div>
 									<div class="row mb-3">
@@ -94,7 +104,7 @@ include 'body_start.php';
 											<h6 class="mb-0">Start <span class="text-warning">*</span></h6>
 										</div>
 										<div class="col-sm-9">
-											<input type="datetime-local" class="form-control" name="event_start">
+											<input type="datetime-local" class="form-control" name="update_event_start" value="<?php echo $data['event_start']; ?>">
 										</div>
 									</div>
 									<div class="row mb-3">
@@ -102,7 +112,7 @@ include 'body_start.php';
 											<h6 class="mb-0">End <span class="text-warning">*</span></h6>
 										</div>
 										<div class="col-sm-9">
-											<input type="datetime-local" class="form-control" name="event_end">
+											<input type="datetime-local" class="form-control" name="update_event_end" value="<?php echo $data['event_end']; ?>">
 										</div>
 									</div>
 									<div class="row mb-3">
@@ -110,7 +120,7 @@ include 'body_start.php';
 											<h6 class="mb-0">Requirement #1 <span class="text-warning">*</span></h6>
 										</div>
 										<div class="col-sm-9">
-											<input type="text" name="event_req1" class="form-control bg-transparent" />
+											<input type="text" name="update_event_req1" class="form-control bg-transparent" value="<?php echo $data['event_req1']; ?>" />
 										</div>
 									</div>
 									<div class="row mb-3">
@@ -118,7 +128,7 @@ include 'body_start.php';
 											<h6 class="mb-0">Requirement #2 <span class="text-warning">(Optional)</span></h6>
 										</div>
 										<div class="col-sm-9">
-											<input type="text" name="event_req2" class="form-control bg-transparent" />
+											<input type="text" name="update_event_req2" class="form-control bg-transparent" value="<?php echo $data['event_req2']; ?>" />
 										</div>
 									</div>
 									<div class="row mb-3">
@@ -126,7 +136,7 @@ include 'body_start.php';
 											<h6 class="mb-0">Requirement #3 <span class="text-warning">(Optional)</span></h6>
 										</div>
 										<div class="col-sm-9">
-											<input type="text" name="event_req3" class="form-control bg-transparent" />
+											<input type="text" name="update_event_req3" class="form-control bg-transparent" value="<?php echo $data['event_req3']; ?>" />
 										</div>
 									</div>
 									<div class="row mb-3">
@@ -134,15 +144,39 @@ include 'body_start.php';
 											<h6 class="mb-0">Requirement #4 <span class="text-warning">(Optional)</span></h6>
 										</div>
 										<div class="col-sm-9">
-											<input type="text" name="event_req4" class="form-control bg-transparent" />
+											<input type="text" name="update_event_req4" class="form-control bg-transparent" value="<?php echo $data['event_req4']; ?>" />
 										</div>
 									</div>
+									<?php if ($data['status'] == "finished") {
+									?>
+										<div class="row mb-3">
+											<div class="col-sm-3">
+												<h6 class="mb-0">WINNER ANNCOUNCED <span class="text-warning">*</span></h6>
+											</div>
+											<div class="col-sm-9">
+												<!-- yes or no -->
+												<div class="form-check form-check-inline">
+													<input class="form-check-input" type="radio" name="update_event_status" id="inlineRadio1" value="announced" <?php if ($data['status'] == "announced"){
+														echo "checked";
+													} ?>>
+													<label class="form-check-label" for="inlineRadio2">YES</label>
+												</div>
+												<div class="form-check form-check-inline">
+													<input class="form-check-input" type="radio" name="update_event_status" id="inlineRadio1" value="finished" <?php if ($data['status'] != "announced"){
+														echo "checked";
+													} ?>>
+													<label class="form-check-label" for="inlineRadio2">NO</label>
+												</div>
+											</div>
+										</div>
+									<?php
+									} ?>
 									<div class="row mb-3">
 										<div class="col-sm-3">
 											<h6 class="mb-0">Description <span class="text-warning">*</span></h6>
 										</div>
 										<div class="col-sm-9">
-											<textarea name="event_description" class="form-control bg-transparent" rows="5"></textarea>
+											<textarea name="update_event_description" class="form-control bg-transparent" rows="5"><?php echo $data['event_description']; ?></textarea>
 										</div>
 									</div>
 									<div class="row mb-3">
@@ -150,26 +184,26 @@ include 'body_start.php';
 											<h6 class="mb-0">Rewards <span class="text-warning">*</span></h6>
 										</div>
 										<div class="col-sm-9">
-											<textarea name="event_rewards" class="form-control bg-transparent" rows="3"></textarea>
+											<textarea name="update_event_rewards" class="form-control bg-transparent" rows="3"><?php echo $data['rewards']; ?></textarea>
 										</div>
 									</div>
 									<div class="row mb-3">
 										<div class="col-sm-3">
-											<h6 class="mb-0">Image <span class="text-warning">*</span></h6>
+											<h6 class="mb-0">Image <span class="text-warning">(Optional)</span></h6>
 										</div>
 										<div class="col-sm-9">
 											<div class="form-group">
-												<input type="file" name="front_image" id="file" class="input-file" accept="image/*">
-												<label for="file" class="btn btn-tertiary js-labelFile">
+												<input type="file" name="update_front_image" id="file" class="input-file" accept="image/*" value="<?php echo $data['event_img'] ?>">
+												<label for="file" class="btn btn-tertiary js-labelFile has-file">
 													<i class="icon fa fa-check"></i>
-													<span class="js-fileName">Choose Front image</span>
+													<span class="js-fileName"><?php echo $data['event_img'] ?></span>
 												</label>
 											</div>
 										</div>
 									</div>
 									<div class="container-fluid mt-5">
 										<div class="float-end">
-											<a type="button" id="submit" class="btn btn-outline-success px-4" style="max-width:200px;">Add Event</a>
+											<a type="button" id="submit" class="btn btn-outline-success px-4" style="max-width:200px;">Update Event</a>
 										</div>
 									</div>
 								</form>
@@ -244,7 +278,7 @@ include 'footer.php';
 						$('.alerts').html("<div class='alert border-0 alert-dismissible fade show py-2'><div class='d-flex align-items-center'><div class='font-35 text-danger'><i class='bx bxs-message-square-x'></i></div><div class='ms-3'><h6 class='mb-0 text-white'>Only jpg, jpeg, png, webp files are allowed</h6></div></div><button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>");
 						$btn.attr('disabled', 'false');
 
-					}else if(data=="exist"){
+					} else if (data == "exist") {
 						$('.alerts').html("<div class='alert border-0 alert-dismissible fade show py-2'><div class='d-flex align-items-center'><div class='font-35 text-danger'><i class='bx bxs-message-square-x'></i></div><div class='ms-3'><h6 class='mb-0 text-white'>Image already exists</h6></div></div><button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>");
 						$btn.attr('disabled', 'false');
 					} else {
@@ -252,7 +286,7 @@ include 'footer.php';
 						$btn.attr('disabled', 'false');
 
 					}
-				
+
 					// scroll to top
 					$('html, body').animate({
 						scrollTop: 0

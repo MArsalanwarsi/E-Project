@@ -40,8 +40,8 @@
                 <div class="col-lg-6 col-md-6 col-sm-12">
                     <div class="copyright">
                         <div class="copy__right__inner text-start">
-                            <p>&copy; 2021, Boighor. Made with <i class="fa fa-heart text-danger"></i> by <a
-                                    href="http://hasthemes.com/" target="_blank">HasThemes</a></p>
+                            <p>&copy; 2024, All Rights Reserved. Made with <i class="fa fa-heart text-danger"></i> by <a
+                                    href="Admin_panel/index.php" target="_blank">Dev Dynasty</a></p>
                         </div>
                     </div>
                 </div>

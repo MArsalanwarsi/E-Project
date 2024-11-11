@@ -1,14 +1,14 @@
-<link rel="stylesheet" href="../css/main.css">
 <?php
 include 'header.php';
 ?>
+<link rel="stylesheet" href="../css/main.css">
 <link href="assets/plugins/Drag-And-Drop/dist/imageuploadify.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
 <?php
 include 'body_start.php';
 ?>
 <!--start page wrapper -->
-<div class="page-wrapper">
+<div class="page-wrapper w-100">
 	<div class="page-content">
 
 		<!--breadcrumb-->
@@ -35,34 +35,64 @@ include 'body_start.php';
 					</div>
 					<div class="form-body mt-4">
 						<div class="row">
-							<div class="col-12">
+							<div class="col-12 col-lg-12 col-xl-12 col-md-12 " style="min-width:fit-content;max-width:fit-content">
 								<div class="border border-3 p-4 rounded">
-									<article class="post side-item content-padding ds ms">
-										<div class="row">
-											<div class="col-xl-4 col-lg-5 col-md-5 p-3">
+									<?php
+									$data = mysqli_query(connection(), "SELECT * FROM events ORDER BY id DESC");
+									function datatime($dt)
+									{
+										$start_datetime_str = $dt;
 
-												<img src="../Images/image.png" alt="" />
-												<div class="media-links">
-													<a class="abs-link" title="" href="event_details.php"></a>
-												</div>
+										// Create a DateTime object
+										$start_datetime = new DateTime($start_datetime_str);
 
-											</div>
+										// Extract date and time components
+										$start_date = $start_datetime->format('Y-m-d'); // 2024-11-08
+										$start_time = $start_datetime->format('H:i');     // 08:28
+										// convert into am pm format
+										$start_time = date('h:i A', strtotime($start_time));
+										// change date format to dd-mm-yy
+										$start_date = date('d-m-Y', strtotime($start_date));
 
-											<div class="col-xl-8 col-lg-7 col-md-6">
-												<div class="item-content text-white">
-													<h5>
-														<a href="event_details.php">Magna aliquyam erased voluptua</a>
-													</h5>
-													<div class="d-flex gap-3">
-														<p class="item-meta color-darkgrey"><i class="fa fa-calendar color-main"></i> <span>Start:</span><span class="ps-0">March 12, 2018</span> </p>
-														<p class="item-meta color-darkgrey"><i class="fa fa-calendar color-main"></i> <span>End:</span><span class="ps-0">March 12, 2018</span></p>
+										return $start_date . ' ' . $start_time;
+									}
+									foreach ($data as $row) {
+
+
+
+									?>
+										<article class="post side-item content-padding ds ms w-100" >
+											<div class="row">
+												<div class="col-xl-4 col-lg-5 col-md-5 p-3">
+
+													<img src="../Images/events_images/<?php echo $row['event_img'] ?>" alt="" style="max-height: 200px;width: 100%; height:100%" />
+													<div class="media-links">
+														<a class="abs-link" title="" href="event_details.php?id=<?php echo $row['id'] ?>"></a>
 													</div>
 
-													<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam et dolore magna aliquyam erat.</p>
+												</div>
+
+												<div class="col-xl-8 col-lg-7 col-md-6">
+													<div class="item-content text-white">
+														<h5>
+															<a href="event_details.php?id=<?php echo $row['id'] ?>"><?php echo $row['event_title'] ?></a>
+														</h5>
+														<div class="d-flex gap-3">
+															<?php if($row['status'] == 'ongoing') { ?>
+															<p class="item-meta color-darkgrey"><i class="fa fa-calendar color-main"></i> <span>Start:</span><span class="ps-0"><?php echo datatime($row['event_start'])	 ?></span> </p>
+															<p class="item-meta color-darkgrey"><i class="fa fa-calendar color-main"></i> <span>End:</span><span class="ps-0"><?php echo datatime($row['event_end'])	 ?></span></p>
+															<?php } else { ?>
+																<p class="item-meta color-darkgrey mb-3"><i class="fa fa-calendar color-main"></i> <span>Finished</span></p>
+															<?php } ?>
+														</div>
+
+														<p ><?php 
+														 echo substr($row['event_description'], 0, 100);?></p>
+													</div>
 												</div>
 											</div>
-										</div>
-									</article>
+										</article>
+									<?php } ?>
 
 								</div>
 							</div>
@@ -82,4 +112,3 @@ include 'body_end.php';
 include 'footer.php';
 ?>
 <!--app JS-->
-<

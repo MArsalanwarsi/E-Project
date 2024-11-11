@@ -2,6 +2,8 @@
 include('header.php');
 include('body_start.php');
 ?>
+<link href="assets/css/app.css" rel="stylesheet">
+<link href="assets/css/icons.css" rel="stylesheet">
 <style>
     /* Global style */
 
@@ -71,21 +73,24 @@ include('body_start.php');
                             <h4 class="text-left mb-40">
                                 Submit Your Story
                             </h4>
-                            <form class="contact-form c-mb-20 c-gutter-20" method="post" action="https://html.modernwebtemplates.com/">
+                            <form class="contact-form c-mb-20 c-gutter-20" method="post" id="particapation_form" enctype="multipart/form-data">
 
                                 <div class="row">
-
+                                    <div class="col-12 alerts">
+                                       
+                                    </div>
+                                    <input type="hidden" name="event_id" value="<?php echo $_GET['id']; ?>">
                                     <div class="col-sm-6">
                                         <div class="form-group has-placeholder">
                                             <label for="name">Full Name <span class="required">*</span></label>
-                                            <input type="text" aria-required="true" size="30" value="" name="name" id="name" class="form-control" placeholder="Full Name">
+                                            <input type="text" aria-required="true" size="30" value="" name="participant_name" id="name" class="form-control" placeholder="Full Name">
                                         </div>
                                     </div>
 
                                     <div class="col-sm-6">
                                         <div class="form-group has-placeholder">
                                             <label for="email">Email address<span class="required">*</span></label>
-                                            <input type="email" aria-required="true" size="30" value="" name="email" id="email" class="form-control" placeholder="Email Address">
+                                            <input type="email" aria-required="true" size="30" value="" name="participant_email" id="email" class="form-control" placeholder="Email Address">
                                         </div>
                                     </div>
 
@@ -96,7 +101,7 @@ include('body_start.php');
                                     <div class="col-sm-6">
                                         <div class="form-group has-placeholder">
                                             <label for="subject">Age<span class="required">*</span></label>
-                                            <input type="text" aria-required="true" size="30" value="" name="Age" id="subject" class="form-control" placeholder="Age">
+                                            <input type="number" aria-required="true" size="30" value="" name="participant_Age" id="subject" class="form-control" placeholder="Age">
                                         </div>
                                     </div>
 
@@ -109,7 +114,7 @@ include('body_start.php');
                                             <div class="row justify-content-start">
                                                 <div class="col-12 col-sm-12 col-md-12 p-3">
                                                     <div class="form-group">
-                                                        <input type="file" name="category_image_update" id="file" class="input-file">
+                                                        <input type="file" name="participant_file" id="file" class="input-file">
                                                         <label for="file" class="btn btn-tertiary js-labelFile">
                                                             <i class="icon fa fa-check"></i>
                                                             <span class="js-fileName">Choose PDF/DOC File</span>
@@ -128,7 +133,7 @@ include('body_start.php');
                                         <div class="col-sm-12 text-left d-flex justify-content-end">
 
                                             <div class="form-group">
-                                                <button type="submit" id="contact_form_submit" name="contact_submit" class="btn btn-maincolor">Send Now
+                                                <button type="button" id="participate_submit" name="contact_submit" class="btn btn-maincolor">Send Now
                                                 </button>
                                             </div>
                                         </div>
@@ -139,7 +144,7 @@ include('body_start.php');
                         </div>
 
 
-                       
+
 
                     </div>
                 </div>
@@ -152,6 +157,7 @@ include('body_start.php');
 include 'body_end.php';
 include 'footer.php';
 ?>
+<script src="assets/js/app.js"></script>
 <script>
     $(document).ready(function() {
         (function() {
@@ -171,5 +177,63 @@ include 'footer.php';
             });
 
         })();
+
+        $('#participate_submit').click(function() {
+            $('#participate_submit').attr("disabled", true);
+            $form = $('#particapation_form');
+            var formData = new FormData($form[0]);
+            $.ajax({
+
+                url: 'code.php',
+
+                type: 'POST',
+
+                data: formData,
+
+                cache: false,
+
+                contentType: false,
+
+                processData: false,
+
+                success: function(data) {
+                    if (data == "success") {
+                        $('.alerts').html("<div class='alert border-0 alert-dismissible fade show py-2 rounded' style='border:green 1px solid !important;padding:20px !important'><div class='d-flex align-items-center'><div class='font-35 text-success'><i class='bx bxs-check-circle'></i></div><div class='ms-3'><h6 class='mb-0 text-white'>File Submitted Successfully</h6></div></div><button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>");
+                        setTimeout(function() {
+                            location.assign("participate.php?id=<?php echo $_GET['id']; ?>");
+                        }, 2000);
+                    } else if (data == "failed") {
+                        $('.alerts').html("<div class='alert border-0 alert-dismissible fade show py-2 rounded' style='border:red 1px solid !important;padding:20px !important'><div class='d-flex align-items-center'><div class='font-35 text-danger'><i class='bx bxs-message-square-x'></i></div><div class='ms-3'><h6 class='mb-0 text-white'>Failed to Update Info. Please Try Again</h6></div></div><button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>");
+                        $('#participate_submit').attr("disabled", false);
+                    } else if (data == "missing") {
+                        $('.alerts').html("<div class='alert border-0 alert-dismissible fade show py-2 rounded' style='border:red 1px solid !important;padding:20px !important'><div class='d-flex align-items-center'><div class='font-35 text-danger'><i class='bx bxs-message-square-x'></i></div><div class='ms-3'><h6 class='mb-0 text-white'>Please Fill All Fields</h6></div></div><button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>");
+                        $('#participate_submit').attr("disabled", false);
+
+                    } else if (data == "email_error") {
+                        $('.alerts').html("<div class='alert border-0 alert-dismissible fade show py-2 rounded' style='border:red 1px solid !important;padding:20px !important'><div class='d-flex align-items-center'><div class='font-35 text-danger'><i class='bx bxs-message-square-x'></i></div><div class='ms-3'><h6 class='mb-0 text-white'>Please Enter a Valid Email</h6></div></div><button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>");
+                        $('#participate_submit').attr("disabled", false);
+
+                    } else if (data == "name_error") {
+                        $('.alerts').html("<div class='alert border-0 alert-dismissible fade show py-2 rounded' style='border:red 1px solid !important;padding:20px !important'><div class='d-flex align-items-center'><div class='font-35 text-danger'><i class='bx bxs-message-square-x'></i></div><div class='ms-3'><h6 class='mb-0 text-white'>Name can only contain letters and spaces</h6></div></div><button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>");
+                        $('#participate_submit').attr("disabled", false);
+
+                    } else if (data == "extention_error") {
+                        $('.alerts').html("<div class='alert border-0 alert-dismissible fade show py-2 rounded' style='border:red 1px solid !important;padding:20px !important'><div class='d-flex align-items-center'><div class='font-35 text-danger'><i class='bx bxs-message-square-x'></i></div><div class='ms-3'><h6 class='mb-0 text-white'>Please Select a PDF/DOC/Docx File</h6></div></div><button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>");
+                        $('#participate_submit').attr("disabled", false);
+
+                    } else if (data == "exist") {
+                        $('.alerts').html("<div class='alert border-0 alert-dismissible fade show py-2 rounded' style='border:red 1px solid !important;padding:20px !important'><div class='d-flex align-items-center'><div class='font-35 text-danger'><i class='bx bxs-message-square-x'></i></div><div class='ms-3'><h6 class='mb-0 text-white'>Email Already Exists</h6></div></div><button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>");
+                        $('#participate_submit').attr("disabled", false);
+
+                    } else {
+                        alert(data);
+                        $('#participate_submit').attr("disabled", false);
+
+                    }
+
+                }
+            });
+
+        });
     })
 </script>

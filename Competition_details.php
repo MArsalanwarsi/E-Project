@@ -1,48 +1,91 @@
 ﻿<?php
 include('header.php');
 include('body_start.php');
+$data = mysqli_fetch_assoc(mysqli_query(connection(), "SELECT * FROM events WHERE id='$_GET[id]'"));
+function datatime($dt)
+{
+  $start_datetime_str = $dt;
+
+  // Create a DateTime object
+  $start_datetime = new DateTime($start_datetime_str);
+
+  // Extract date and time components
+  $start_date = $start_datetime->format('Y-m-d'); // 2024-11-08
+  $start_time = $start_datetime->format('H:i');     // 08:28
+  // convert into am pm format
+  $start_time = date('h:i A', strtotime($start_time));
+  // change date format to dd-mm-yy
+  $start_date = date('d-m-Y', strtotime($start_date));
+
+  return $start_date . ' ' . $start_time;
+}
 ?>
+
 <link rel="stylesheet" href="css/main.css">
 <div class="bg-light p-5 w-100"></div>
 <!-- Start My Account Area -->
 <section class="my_account_area pt--80 pb--55 bg--white">
   <div class="container">
     <div class="row">
-      <article class="vertical-item content-padding post type-event status-publish format-standard has-post-thumbnail mt-5">
+      <article class="vertical-item content-padding post type-event status-publish format-standard has-post-thumbnail ">
         <div class="item-media post-thumbnail p-5" style="max-height: 500px;">
-          <img src="Images/image.png" alt="" />
+          <img src="Images/events_images/<?php echo $data['event_img'] ?>" alt="" />
         </div>
 
         <div class="item-content">
           <!-- .post-thumbnail -->
           <header class="entry-header">
             <div class="entry-meta mb-5">
-              <div class="entry-date">
-              <i class="fa fa-calendar color-main"></i> <span>Start:</span> <span>March 12, 2018</span>
+              <?php if ($data['status'] == 'ongoing') { ?>
+              <div class="entry-date" style="line-height: 20px;">
+                <i class="fa fa-calendar color-main"></i> <span class="h6">Start:</span>
+                <span><?php echo datatime($data['event_start']) ?></span>
               </div>
-              <div class="entry-categories">
-              <i class="fa fa-calendar color-main"></i> <span>End:</span> <span>March 12, 2018</span>
+              <div class="entry-categories" style="line-height: 20px;">
+                <i class="fa fa-calendar color-main"></i> <span class="h6">End:</span>
+                <span><?php echo datatime($data['event_end']) ?></span>
               </div>
+              <?php } else { ?>
+                <div class="entry-date h3" style="line-height: 20px;">
+                <i class="fa fa-calendar color-main "></i> <span class="h3">Finished</span>
+              </div>
+              <?php } ?>
             </div>
             <!-- .entry-meta -->
           </header>
           <!-- .entry-header -->
 
           <div class="entry-content">
-            <p>At vero eos accusam justo duo dolores et rebum clita kasd gubergren nosea takimata sanctus est dolor sit amet</p>
-
-            <p>At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor amet consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt.</p>
+            <p><?php echo $data['event_description'] ?></p>
             <h4>Requirements</h4>
             <ul class="list-styled">
-              <li>Consetetur sadipscing elitr, sed diam nonumy</li>
-              <li>Eirmod tempor invidunt ut labore</li>
-              <li>Dolore magna aliquyam erat</li>
-              <li>Sed diam voluptua. At vero eos accusam</li>
+              <li><?php echo $data['event_req1'] ?></li>
+              <?php if ($data['event_req2'] != null || $data['event_req2'] != "") { ?><li><?php echo $data['event_req2'] ?></li> <?php } ?>
+              <?php if ($data['event_req3'] != null || $data['event_req3'] != "") { ?><li><?php echo $data['event_req3'] ?></li> <?php } ?>
+              <?php if ($data['event_req4'] != null || $data['event_req4'] != "") { ?><li><?php echo $data['event_req4'] ?></li> <?php } ?>
+
             </ul>
           </div>
+          <div class="entry-content">
+            <h4>REWARDS</h4>
+            <p><?php echo $data['rewards'] ?></p>
+          </div>
           <!-- .entry-content -->
-          <div class="d-flex justify-content-end mt-5">
-            <a href="participate.php" class="btn btn-outline-danger">Participate</a>
+          <div class="d-flex flex-wrap justify-content-end gap-4 mt-5">
+            <?php if ($data['status'] == 'ongoing') {
+            ?>
+              <a href="participate.php?id=<?php echo $data['id'] ?>" class="btn btn-outline-danger">Participate</a>
+            <?php
+            } else if ($data['status'] == 'announced') {
+            ?>
+              <a href="announced.php?id=<?php echo $data['id'] ?>" class="btn btn-outline-success">Winner Announced</a>
+            <?php
+            } else {
+            ?>
+              <button class="btn btn-danger" disabled>Finished</button>
+            <?php
+            } ?>
+
           </div>
         </div>
         <!-- .item-content -->
