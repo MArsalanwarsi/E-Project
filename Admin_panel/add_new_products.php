@@ -271,6 +271,8 @@ include 'footer.php';
 						setTimeout(function() {
 							location.reload();
 						}, 3000);
+					}else{
+						alert(response);
 					}
 
 

@@ -25,10 +25,10 @@
 				<div class="card">
 					<div class="row g-0">
 						<div class="col-md-4 border-end">
-							<img src="../Images\books_images\<?php echo $data['book_img1'] ?>" class="img-fluid main_img" alt="...">
+							<img src="../Images\books_images\<?php echo $data['book_img1'] ?>" class="img-fluid main_img" alt="..." style="height: 500px; width: 100%;">
 							<div class="row mb-3 row-cols-auto g-2 justify-content-center mt-3">
-								<div class="col"><img src="../Images/books_images/<?= $data['book_img1'] ?>" width="70" class="border rounded cursor-pointer first_img" alt=""></div>
-								<div class="col"><img src="../Images/books_images/<?= $data['book_img2'] ?>" width="70" class="border rounded cursor-pointer second_img" alt=""></div>
+								<div class="col"><img src="../Images/books_images/<?= $data['book_img1'] ?>" width="70" class="border rounded cursor-pointer first_img h-100" alt=""></div>
+								<div class="col"><img src="../Images/books_images/<?= $data['book_img2'] ?>" width="70" class="border rounded cursor-pointer second_img h-100" alt=""></div>
 							</div>
 						</div>
 						<div class="col-md-8 mt-5">

@@ -257,8 +257,9 @@
     loop: true,
     margin: 0,
     nav: false,
-    autoplay: false,
-    autoplayTimeout: 10000,
+    autoplay:true,
+    autoplayTimeout:3000,
+    autoplayHoverPause:false,
     items: 4,
     addClassActive: true,
     dots: false,
@@ -478,14 +479,16 @@
   /*====== Price Slider Active ======*/
   $("#slider-range").slider({
     range: true,
-    min: 10,
-    max: 500,
-    values: [110, 400],
+    min: 100,
+    max: 10000,
+    values: [1000, 4000],
     slide: function (event, ui) {
-      $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+      $("#min").val("$" + ui.values[0]);
+      $("#max").val("$" + ui.values[1]);
     },
   });
-  $("#amount").val("$" + $("#slider-range").slider("values", 0) + " - $" + $("#slider-range").slider("values", 1));
+  $("#min").val("$" + $("#slider-range").slider("values", 0));
+  $("#max").val("$" + $("#slider-range").slider("values", 1));
 
   /*====== Dropdown ======*/
   $(".dropdown").parent(".drop").css("position", "relative");

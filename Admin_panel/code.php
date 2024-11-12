@@ -67,9 +67,11 @@ if (isset($_POST['book_Category_update'])) {
 
 if (isset($_POST['book_title'])) {
     $book_title = $_POST['book_title'];
+    $book_title = mysqli_real_escape_string(connection(), $book_title);
     $book_description = $_POST['book_description'];
     $book_description = mysqli_real_escape_string(connection(), $book_description);
     $book_author = $_POST['book_author'];
+    $book_author = mysqli_real_escape_string(connection(), $book_author);
     $orignal_price = $_POST['orignal_price'];
     $discounted_price = $_POST['discounted_price'];
     $pdf = $_POST['pdf'];
@@ -149,9 +151,9 @@ if (isset($_POST['book_id'])) {
         if (file_exists($image_path2)) {
             unlink($image_path2);
         }
-        echo "<div class='alert border-0 alert-dismissible fade show py-2'><div class='d-flex align-items-center'><div class='font-35 text-success'><i class='bx bxs-check-circle'></i></div><div class='ms-3'><h6 class='mb-0 text-white'>Category Deleted Successfully</h6></div></div><button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+        echo "<div class='alert border-0 alert-dismissible fade show py-2'><div class='d-flex align-items-center'><div class='font-35 text-success'><i class='bx bxs-check-circle'></i></div><div class='ms-3'><h6 class='mb-0 text-white'>Product Deleted Successfully</h6></div></div><button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
     } else {
-        echo "<div class='alert border-0 alert-dismissible fade show py-2'><div class='d-flex align-items-center'><div class='font-35 text-danger'><i class='bx bxs-message-square-x'></i></div><div class='ms-3'><h6 class='mb-0 text-white'>Failed to Delete Category. Please Try Again</h6></div></div><button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+        echo "<div class='alert border-0 alert-dismissible fade show py-2'><div class='d-flex align-items-center'><div class='font-35 text-danger'><i class='bx bxs-message-square-x'></i></div><div class='ms-3'><h6 class='mb-0 text-white'>Failed to Delete Product. Please Try Again</h6></div></div><button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
     }
 }
 

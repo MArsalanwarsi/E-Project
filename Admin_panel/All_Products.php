@@ -12,7 +12,7 @@ include 'body_start.php';
 					<div class="card-body">
 						<div class="row align-items-center">
 							<div class="col-lg-3 col-xl-2">
-								<a href="ecommerce-add-new-products.html" class="btn btn-light mb-3 mb-lg-0"><i class='bx bxs-plus-square'></i>New Product</a>
+								<a href="add_new_products.php" class="btn btn-light mb-3 mb-lg-0"><i class='bx bxs-plus-square'></i>New Product</a>
 							</div>
 							<div class="col-lg-9 col-xl-10">
 								<form class="float-lg-end">
