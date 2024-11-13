@@ -257,9 +257,9 @@
     loop: true,
     margin: 0,
     nav: false,
-    autoplay:true,
-    autoplayTimeout:3000,
-    autoplayHoverPause:false,
+    autoplay: true,
+    autoplayTimeout: 3000,
+    autoplayHoverPause: false,
     items: 4,
     addClassActive: true,
     dots: false,
@@ -483,12 +483,11 @@
     max: 10000,
     values: [1000, 4000],
     slide: function (event, ui) {
-      $("#min").val("$" + ui.values[0]);
-      $("#max").val("$" + ui.values[1]);
+      $("#p_filter").val("RS " + ui.values[0] + " - RS " + ui.values[1]);
     },
   });
-  $("#min").val("$" + $("#slider-range").slider("values", 0));
-  $("#max").val("$" + $("#slider-range").slider("values", 1));
+  // $("#min").val("$" + );
+  $("#p_filter").val("RS " + $("#slider-range").slider("values", 0) + " - RS " + $("#slider-range").slider("values", 1));
 
   /*====== Dropdown ======*/
   $(".dropdown").parent(".drop").css("position", "relative");

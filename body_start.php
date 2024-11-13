@@ -18,7 +18,7 @@
                             <ul class="meninmenu d-flex justify-content-start">
                                 <li class=""><a href="index.php">Home</a>
                                 </li>
-                                <li class=""><a href="#">Shop</a>
+                                <li class=""><a href="shop.php">Shop</a>
                                 </li>
                                 <li class="drop"><a href="shop-grid.html">Books</a>
                                     <div class="megamenu mega03">
@@ -184,44 +184,11 @@
                     <div class="col-lg-12 d-none">
                         <nav class="mobilemenu__nav">
                             <ul class="meninmenu">
-                                <li><a href="index-2.html">Home</a>
-                                    <ul>
-                                        <li><a href="index-2.html">Home Style Default</a></li>
-                                        <li><a href="index-3.html">Home Style Two</a></li>
-                                        <li><a href="index-4.html">Home Style Three</a></li>
-                                        <li><a href="index-box.html">Home Box Style</a></li>
-                                    </ul>
+                                <li><a href="index.php">Home</a>
                                 </li>
-                                <li><a href="#">Pages</a>
-                                    <ul>
-                                        <li><a href="about.html">About Page</a></li>
-                                        <li><a href="portfolio.html">Portfolio</a>
-                                            <ul>
-                                                <li><a href="portfolio.html">Portfolio</a></li>
-                                                <li><a href="portfolio-three-column.html">Portfolio 3 Column</a></li>
-                                                <li><a href="portfolio-details.html">Portfolio Details</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="my-account.html">My Account</a></li>
-                                        <li><a href="cart.html">Cart Page</a></li>
-                                        <li><a href="checkout.html">Checkout Page</a></li>
-                                        <li><a href="wishlist.html">Wishlist Page</a></li>
-                                        <li><a href="error404.html">404 Page</a></li>
-                                        <li><a href="faq.html">Faq Page</a></li>
-                                        <li><a href="team.html">Team Page</a></li>
-                                    </ul>
+                                <li><a href="shop.php">Shop</a>
                                 </li>
-                                <li><a href="shop-grid.html">Shop</a>
-                                    <ul>
-                                        <li><a href="shop-grid.html">Shop Grid</a></li>
-                                        <li><a href="shop-list.html">Shop List</a></li>
-                                        <li><a href="shop-left-sidebar.html">Shop Left Sidebar</a></li>
-                                        <li><a href="shop-right-sidebar.html">Shop Right Sidebar</a></li>
-                                        <li><a href="shop-no-sidebar.html">Shop No sidebar</a></li>
-                                        <li><a href="single-product.html">Single Product</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="blog.html">Blog</a>
+                                <li><a href="">Books</a>
                                     <ul>
                                         <li><a href="blog.html">Blog Page</a></li>
                                         <li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
@@ -229,6 +196,7 @@
                                         <li><a href="blog-details.html">Blog Details</a></li>
                                     </ul>
                                 </li>
+                                <li><a href="">About</a></li>
                                 <li><a href="contact.html">Contact</a></li>
                             </ul>
                         </nav>

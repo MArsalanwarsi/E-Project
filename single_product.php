@@ -227,7 +227,7 @@ $des = mysqli_fetch_assoc(mysqli_query(connection(), "select * from books where 
                             ?>
                         </ul>
                     </aside>
-                    <aside class="widget__categories pro--range">
+                    <!-- <aside class="widget__categories pro--range">
                         <h3 class="widget__title">Filter by price</h3>
                         <div class="content-shopby">
                             <div class="price_filter s-filter clear">
@@ -235,19 +235,19 @@ $des = mysqli_fetch_assoc(mysqli_query(connection(), "select * from books where 
                                     <div id="slider-range"></div>
                                     <div class="slider__range--output">
                                         <div class="price__output--wrap">
-                                            <div class="price--output d-flex gap-0">
-                                                <span>Price:</span><span class="d-flex gap-0"><input type="text" id="min" readonly="" name="pric_filter" clas="m-0  p-0">
-                                                <input type="text" id="max" readonly="" name="pric_filter" class="m-0 p-0"></span>
+                                            <div class="price--output mb-3">
+                                                <span>Price:</span>
+                                                    <input type="text" id="p_filter" readonly="" name="pric_filter">
                                             </div>
                                             <div class="price--filter">
-                                                <button type="submit" href="#">Filter</button>
+                                                <button class="btn btn-dark" href="#">Filter</button>
                                             </div>
                                         </div>
                                     </div>
                                 </form>
                             </div>
                         </div>
-                    </aside>
+                    </aside> -->
 
                 </div>
             </div>
