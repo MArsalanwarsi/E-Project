@@ -239,3 +239,484 @@ if (isset($_POST['participant_name'])) {
     }
   }
 }
+
+// allshopdata1
+
+if (isset($_POST['shop_page1'])) {
+  $pageNumber = $_POST['shop_page1'];
+  // according to pagination each page having 9 products
+  $limit = 9;
+  // get the offset for each page
+  $offset = ($pageNumber - 1) * $limit;
+  $sql = "SELECT * FROM books LIMIT $offset, $limit";
+  $result = mysqli_query(connection(), $sql);
+  if (mysqli_num_rows($result) > 0) {
+    $data = "";
+    foreach ($result as $b) {
+      $data .= " <div class='product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12'>
+                                    <div class='product__thumb' style='height: 400px;'>
+                                        <a class='first__img h-100' href='single-product.html'><img
+                                                src='images/books_images/" . $b['book_img1'] . "'
+                                                alt='product image' class='h-100'></a>
+                                        <a class='second__img animation1' href='single-product.html'><img
+                                                src='images/books_images/" . $b['book_img2'] . "'
+                                                alt='product image' class='h-100'></a>
+                                        <div class='hot__box'>
+                                            <span class='hot-label'>BEST SALLER</span>
+                                        </div>
+                                    </div>
+                                    <div class='product__content content--center'>
+                                        <h4><a href='single-product.html'>" . $b['book_name'] . "</a></h4>
+                                        <ul class='price d-flex'>
+                                            <li>RS " . $b['book_price'] . "</li>
+                                        </ul>
+                                        <div class='action'>
+                                            <div class='actions_inner'>
+                                                <ul class='add_to_links'>
+                                                    <li><a class='cart' href='cart.html'><i
+                                                                class='bi bi-shopping-bag4'></i></a></li>
+                                                    <li><a class='wishlist' href='wishlist.html'><i
+                                                                class='bi bi-shopping-cart-full'></i></a></li>
+                                                    <li><a class='compare' href='#'><i
+                                                                class='bi bi-heart-beat'></i></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>";
+    }
+  } else {
+    $data = "No data found";
+  }
+  echo $data;
+}
+if (isset($_POST['shop_page2'])) {
+  $pageNumber = $_POST['shop_page2'];
+  // according to pagination each page having 9 products
+  $limit = 9;
+  // get the offset for each page
+  $offset = ($pageNumber - 1) * $limit;
+  $sql = "SELECT * FROM books LIMIT $offset, $limit";
+  $result = mysqli_query(connection(), $sql);
+  if (mysqli_num_rows($result) > 0) {
+    $data = "";
+    foreach ($result as $b) {
+      $data .= " <div class='list__view__wrapper'>
+                            <!-- Start Single Product -->
+                            <div class='list__view mb-2'>
+                                <div class='thumb' style='height: 400px;'>
+                                    <a class='first__img h-100' href='single-product.html'><img
+                                            src='images/books_images/" . $b['book_img1'] . "' class='h-100'></a>
+                                    <a class='second__img animation1 h-100' href='single-product.html'><img
+                                            src='images/books_images/" . $b['book_img2'] . "' alt='product images' class='h-100'></a>
+                                </div>
+                                <div class='content'>
+                                    <h2><a href='single-product.html'>Ali Smith</a></h2>
+                                    <ul class='rating d-flex'>
+                                        <li class='on'><i class='fa fa-star-o'></i></li>
+                                        <li class='on'><i class='fa fa-star-o'></i></li>
+                                        <li class='on'><i class='fa fa-star-o'></i></li>
+                                        <li class='on'><i class='fa fa-star-o'></i></li>
+                                        <li><i class='fa fa-star-o'></i></li>
+                                        <li><i class='fa fa-star-o'></i></li>
+                                    </ul>
+                                    <ul class='price__box'>
+                                        <li>$111.00</li>
+                                        <li class='old__price'>$220.00</li>
+                                    </ul>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla
+                                        augue nec est tristique auctor. Donec non est at libero vulputate
+                                        rutrum. Morbi ornare lectus quis justo gravida semper. Nulla tellus mi,
+                                        vulputate adipiscing cursus eu, suscipit id nulla.</p>
+                                    <ul class='cart__action d-flex'>
+                                        <li class='cart'><a href='cart.html'>Add to cart</a></li>
+                                        <li class='wishlist'><a href='cart.html'></a></li>
+                                        <li class='compare'><a href='cart.html'></a></li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                            <!-- End Single Product -->
+                          
+                        </div>";
+    }
+  } else {
+    $data = "No data found";
+  }
+  echo $data;
+}
+
+if (isset($_POST['shop_category1'])) {
+  $cat = $_POST['shop_category1'];
+  $page = $_POST['shop_page_cat1'];
+  // according to pagination each page having 9 products
+  $limit = 9;
+  // get the offset for each page
+  $offset = ($page - 1) * $limit;
+  $sql = "SELECT * FROM books WHERE book_category = '$cat' LIMIT $offset, $limit";
+  $result = mysqli_query(connection(), $sql);
+
+  if (mysqli_num_rows($result) > 0) {
+    $data = "";
+    foreach ($result as $b) {
+      $data .= " <div class='product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12'>
+                                    <div class='product__thumb' style='height: 400px;'>
+                                        <a class='first__img h-100' href='single-product.html'><img
+                                                src='images/books_images/" . $b['book_img1'] . "'
+                                                alt='product image' class='h-100'></a>
+                                        <a class='second__img animation1 h-100' href='single-product.html'><img
+                                                src='images/books_images/" . $b['book_img2'] . "'
+                                                alt='product image' class='h-100'></a>
+                                        <div class='hot__box'>
+                                            <span class='hot-label'>BEST SALLER</span>
+                                        </div>
+                                    </div>
+                                    <div class='product__content content--center'>
+                                        <h4><a href='single-product.html'>" . $b['book_name'] . "</a></h4>
+                                        <ul class='price d-flex'>
+                                            <li>RS " . $b['book_price'] . "</li>
+                                        </ul>
+                                        <div class='action'>
+                                            <div class='actions_inner'>
+                                                <ul class='add_to_links'>
+                                                    <li><a class='cart' href='cart.html'><i
+                                                                class='bi bi-shopping-bag4'></i></a></li>
+                                                    <li><a class='wishlist' href='wishlist.html'><i
+                                                                class='bi bi-shopping-cart-full'></i></a></li>
+                                                    <li><a class='compare' href='#'><i
+                                                                class='bi bi-heart-beat'></i></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>";
+    }
+  } else {
+    $data = "No data found";
+  }
+  echo $data;
+}
+
+
+if (isset($_POST['shop_category2'])) {
+  $cat = $_POST['shop_category2'];
+  $page = $_POST['shop_page_cat2'];
+  // according to pagination each page having 9 products
+  $limit = 9;
+  // get the offset for each page
+  $offset = ($page - 1) * $limit;
+  $sql = "SELECT * FROM books WHERE book_category = '$cat' LIMIT $offset, $limit";
+  $result = mysqli_query(connection(), $sql);
+  if (mysqli_num_rows($result) > 0) {
+    $data = "";
+    foreach ($result as $b) {
+      $data .= " <div class='list__view__wrapper'>
+                            <!-- Start Single Product -->
+                            <div class='list__view mb-2'>
+                                <div class='thumb' style='height: 400px;'>
+                                    <a class='first__img h-100' href='single-product.html'><img
+                                            src='images/books_images/" . $b['book_img1'] . "' class='h-100'></a>
+                                    <a class='second__img animation1 h-100' href='single-product.html'><img
+                                            src='images/books_images/" . $b['book_img2'] . "' alt='product images' class='h-100'></a>
+                                </div>
+                                <div class='content'>
+                                    <h2><a href='single-product.html'>Ali Smith</a></h2>
+                                    <ul class='rating d-flex'>
+                                        <li class='on'><i class='fa fa-star-o'></i></li>
+                                        <li class='on'><i class='fa fa-star-o'></i></li>
+                                        <li class='on'><i class='fa fa-star-o'></i></li>
+                                        <li class='on'><i class='fa fa-star-o'></i></li>
+                                        <li><i class='fa fa-star-o'></i></li>
+                                        <li><i class='fa fa-star-o'></i></li>
+                                    </ul>
+                                    <ul class='price__box'>
+                                        <li>$111.00</li>
+                                        <li class='old__price'>$220.00</li>
+                                    </ul>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla
+                                        augue nec est tristique auctor. Donec non est at libero vulputate
+                                        rutrum. Morbi ornare lectus quis justo gravida semper. Nulla tellus mi,
+                                        vulputate adipiscing cursus eu, suscipit id nulla.</p>
+                                    <ul class='cart__action d-flex'>
+                                        <li class='cart'><a href='cart.html'>Add to cart</a></li>
+                                        <li class='wishlist'><a href='cart.html'></a></li>
+                                        <li class='compare'><a href='cart.html'></a></li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                            <!-- End Single Product -->
+                          
+                        </div>";
+    }
+  } else {
+    $data = "No data found";
+  }
+  echo $data;
+}
+
+// filter according to price
+if (isset($_POST['filter_cat_price1'])) {
+  $price = $_POST['filter_cat_price1'];
+  $cat = $_POST['filter_shop_cat1'];
+  $page = $_POST['filter_page_cat1'];
+  // get min and max
+  preg_match_all('/\d+/', $price, $matches);
+  $min = $matches[0][0];
+  $max = $matches[0][1];
+  // according to pagination each page having 9 products
+  $limit = 9;
+  // get the offset for each page
+  $offset = ($page - 1) * $limit;
+  $sql = "SELECT * FROM books WHERE book_category = '$cat' AND book_price BETWEEN $min AND $max LIMIT $offset, $limit";
+  $result = mysqli_query(connection(), $sql);
+  if (mysqli_num_rows($result) > 0) {
+    $data = "";
+    foreach ($result as $b) {
+      $data .= " <div class='product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12'>
+                                      <div class='product__thumb' style='height: 400px;'>
+                                          <a class='first__img h-100' href='single-product.html'><img
+                                                  src='images/books_images/" . $b['book_img1'] . "'
+                                                  alt='product image' class='h-100'></a>
+                                          <a class='second__img animation1 h-100' href='single-product.html'><img
+                                                  src='images/books_images/" . $b['book_img2'] . "'
+                                                  alt='product image' class='h-100'></a>
+                                          <div class='hot__box'>
+                                              <span class='hot-label'>BEST SALLER</span>
+                                          </div>
+                                      </div>
+                                      <div class='product__content content--center'>
+                                          <h4><a href='single-product.html'>" . $b['book_name'] . "</a></h4>
+                                          <ul class='price d-flex'>
+                                              <li>RS " . $b['book_price'] . "</li>
+                                          </ul>
+                                          <div class='action'>
+                                              <div class='actions_inner'>
+                                                  <ul class='add_to_links'>
+                                                      <li><a class='cart' href='cart.html'><i
+                                                                  class='bi bi-shopping-bag4'></i></a></li>
+                                                      <li><a class='wishlist' href='wishlist.html'><i
+                                                                  class='bi bi-shopping-cart-full'></i></a></li>
+                                                      <li><a class='compare' href='#'><i
+                                                                  class='bi bi-heart-beat'></i></a></li>
+                                                  </ul>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>";
+    }
+  } else {
+    $data = "No data found";
+  }
+  echo $data;
+}
+
+if (isset($_POST['filter_cat_price2'])) {
+  $price = $_POST['filter_cat_price2'];
+  $cat = $_POST['filter_shop_cat2'];
+  $page = $_POST['filter_page_cat2'];
+  // get min and max
+  preg_match_all('/\d+/', $price, $matches);
+  $min = $matches[0][0];
+  $max = $matches[0][1];
+  // according to pagination each page having 9 products
+  $limit = 9;
+  // get the offset for each page
+  $offset = ($page - 1) * $limit;
+  $sql = "SELECT * FROM books WHERE book_category = '$cat' AND book_price BETWEEN $min AND $max LIMIT $offset, $limit";
+  $result = mysqli_query(connection(), $sql);
+  if (mysqli_num_rows($result) > 0) {
+    $data = "";
+    foreach ($result as $b) {
+      $data .= " <div class='list__view__wrapper'>
+                            <!-- Start Single Product -->
+                            <div class='list__view mb-2'>
+                                <div class='thumb' style='height: 400px;'>
+                                    <a class='first__img h-100' href='single-product.html'><img
+                                            src='images/books_images/" . $b['book_img1'] . "' class='h-100'></a>
+                                    <a class='second__img animation1 h-100' href='single-product.html'><img
+                                            src='images/books_images/" . $b['book_img2'] . "' alt='product images' class='h-100'></a>
+                                </div>
+                                <div class='content'>
+                                    <h2><a href='single-product.html'>Ali Smith</a></h2>
+                                    <ul class='rating d-flex'>
+                                        <li class='on'><i class='fa fa-star-o'></i></li>
+                                        <li class='on'><i class='fa fa-star-o'></i></li>
+                                        <li class='on'><i class='fa fa-star-o'></i></li>
+                                        <li class='on'><i class='fa fa-star-o'></i></li>
+                                        <li><i class='fa fa-star-o'></i></li>
+                                        <li><i class='fa fa-star-o'></i></li>
+                                    </ul>
+                                    <ul class='price__box'>
+                                        <li>$111.00</li>
+                                        <li class='old__price'>$220.00</li>
+                                    </ul>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla
+                                        augue nec est tristique auctor. Donec non est at libero vulputate
+                                        rutrum. Morbi ornare lectus quis justo gravida semper. Nulla tellus mi,
+                                        vulputate adipiscing cursus eu, suscipit id nulla.</p>
+                                    <ul class='cart__action d-flex'>
+                                        <li class='cart'><a href='cart.html'>Add to cart</a></li>
+                                        <li class='wishlist'><a href='cart.html'></a></li>
+                                        <li class='compare'><a href='cart.html'></a></li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                            <!-- End Single Product -->
+                          
+                        </div>";
+    }
+  } else {
+    $data = "No data found";
+  }
+  echo $data;
+}
+
+if (isset($_POST['filter_price1'])) {
+  $price = $_POST['filter_price1'];
+  $page = $_POST['filter_page1'];
+  // get min and max
+  preg_match_all('/\d+/', $price, $matches);
+  $min = $matches[0][0];
+  $max = $matches[0][1];
+  // according to pagination each page having 9 products
+  $limit = 9;
+  // get the offset for each page
+  $offset = ($page - 1) * $limit;
+  $sql = "SELECT * FROM books WHERE book_price BETWEEN $min AND $max LIMIT $offset, $limit";
+  $result = mysqli_query(connection(), $sql);
+  if (mysqli_num_rows($result) > 0) {
+    $data = "";
+    foreach ($result as $b) {
+      $data .= " <div class='product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12'>
+                                      <div class='product__thumb' style='height: 400px;'>
+                                          <a class='first__img h-100' href='single-product.html'><img
+                                                  src='images/books_images/" . $b['book_img1'] . "'
+                                                  alt='product image' class='h-100'></a>
+                                          <a class='second__img animation1 h-100' href='single-product.html'><img
+                                                  src='images/books_images/" . $b['book_img2'] . "'
+                                                  alt='product image' class='h-100'></a>
+                                          <div class='hot__box'>
+                                              <span class='hot-label'>BEST SALLER</span>
+                                          </div>
+                                      </div>
+                                      <div class='product__content content--center'>
+                                          <h4><a href='single-product.html'>" . $b['book_name'] . "</a></h4>
+                                          <ul class='price d-flex'>
+                                              <li>RS " . $b['book_price'] . "</li>
+                                          </ul>
+                                          <div class='action'>
+                                              <div class='actions_inner'>
+                                                  <ul class='add_to_links'>
+                                                      <li><a class='cart' href='cart.html'><i
+                                                                  class='bi bi-shopping-bag4'></i></a></li>
+                                                      <li><a class='wishlist' href='wishlist.html'><i
+                                                                  class='bi bi-shopping-cart-full'></i></a></li>
+                                                      <li><a class='compare' href='#'><i
+                                                                  class='bi bi-heart-beat'></i></a></li>
+                                                  </ul>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>";
+    }
+  } else {
+    $data = "No data found";
+  }
+  echo $data;
+}
+
+if (isset($_POST['filter_price2'])) {
+  $price = $_POST['filter_price2'];
+  $page = $_POST['filter_page2'];
+  // get min and max
+  preg_match_all('/\d+/', $price, $matches);
+  $min = $matches[0][0];
+  $max = $matches[0][1];
+  // according to pagination each page having 9 products
+  $limit = 9;
+  // get the offset for each page
+  $offset = ($page - 1) * $limit;
+  $sql = "SELECT * FROM books WHERE book_price BETWEEN $min AND $max LIMIT $offset, $limit";
+  $result = mysqli_query(connection(), $sql);
+  if (mysqli_num_rows($result) > 0) {
+    $data = "";
+    foreach ($result as $b) {
+      $data .= "<div class='list__view__wrapper'>
+                            <!-- Start Single Product -->
+                            <div class='list__view mb-2'>
+                                <div class='thumb' style='height: 400px;'>
+                                    <a class='first__img h-100' href='single-product.html'><img
+                                            src='images/books_images/" . $b['book_img1'] . "' class='h-100'></a>
+                                    <a class='second__img animation1 h-100' href='single-product.html'><img
+                                            src='images/books_images/" . $b['book_img2'] . "' alt='product images' class='h-100'></a>
+                                </div>
+                                <div class='content'>
+                                    <h2><a href='single-product.html'>Ali Smith</a></h2>
+                                    <ul class='rating d-flex'>
+                                        <li class='on'><i class='fa fa-star-o'></i></li>
+                                        <li class='on'><i class='fa fa-star-o'></i></li>
+                                        <li class='on'><i class='fa fa-star-o'></i></li>
+                                        <li class='on'><i class='fa fa-star-o'></i></li>
+                                        <li><i class='fa fa-star-o'></i></li>
+                                        <li><i class='fa fa-star-o'></i></li>
+                                    </ul>
+                                    <ul class='price__box'>
+                                        <li>$111.00</li>
+                                        <li class='old__price'>$220.00</li>
+                                    </ul>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla
+                                        augue nec est tristique auctor. Donec non est at libero vulputate
+                                        rutrum. Morbi ornare lectus quis justo gravida semper. Nulla tellus mi,
+                                        vulputate adipiscing cursus eu, suscipit id nulla.</p>
+                                    <ul class='cart__action d-flex'>
+                                        <li class='cart'><a href='cart.html'>Add to cart</a></li>
+                                        <li class='wishlist'><a href='cart.html'></a></li>
+                                        <li class='compare'><a href='cart.html'></a></li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                            <!-- End Single Product -->
+                          
+                        </div>";
+    }
+  } else {
+    $data = "No data found";
+  }
+  echo $data;
+}
+// update total pages with filteration
+// if (isset($_POST['total_pages_price_cat'])) {
+//   $price = $_POST['total_pages_price_cat'];
+//   $cat = $_POST['total_pages_cat_cat'];
+//   preg_match_all('/\d+/', $price, $matches);
+//   $min = $matches[0][0];
+//   $max = $matches[0][1];
+//   $sql = "SELECT * FROM books WHERE book_category = '$cat' AND book_price BETWEEN $min AND $max";
+//   $result = mysqli_query(connection(), $sql);
+//   $total_pages = ceil(mysqli_num_rows($result) / 9);
+//   echo $total_pages;
+// }
+// if (isset($_POST['total_pages_price'])) {
+//   $price = $_POST['total_pages_price'];
+//   preg_match_all('/\d+/', $price, $matches);
+//   $min = $matches[0][0];
+//   $max = $matches[0][1];
+//   $sql = "SELECT * FROM books WHERE book_price BETWEEN $min AND $max";
+//   $result = mysqli_query(connection(), $sql);
+//   $total_pages = ceil(mysqli_num_rows($result) / 9);
+//   echo $total_pages;
+// }
+
+// if(isset($_POST['pages_checker'])){
+//     $price = $_POST['pages_checker'];
+//     preg_match_all('/\d+/', $price, $matches);
+//     $min = $matches[0][0];
+//     $max = $matches[0][1];
+//     $sql = "SELECT * FROM books WHERE after_discount_price BETWEEN $min AND $max";
+//     $result = mysqli_query(connection(), $sql);
+//     $total_pages = ceil(mysqli_num_rows($result) / 9);
+//     echo $total_pages;
+// }
