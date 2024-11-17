@@ -15,14 +15,15 @@ $des = mysqli_fetch_assoc(mysqli_query(connection(), "select * from books where 
                     <div class="row">
                         <div class="col-lg-6 col-12">
                             <div class="wn__fotorama__wrapper">
-                                <div class="fotorama wn__fotorama__action" data-nav="thumbs">
-                                    <a><img src="Images/books_images/<?= $des['book_img1'] ?>" alt="" class="h-100"></a>
-                                    <a><img src="Images/books_images/<?= $des['book_img2'] ?>" alt="" class="h-100"></a>
+                                <div class="fotorama wn__fotorama__action" data-nav="thumbs" data-width="100%"
+                                    data-height="100%">
+                                    <a><img src="Images/books_images/<?= $des['book_img1'] ?>" alt="" class="h-100 w-100"></a>
+                                    <a><img src="Images/books_images/<?= $des['book_img2'] ?>" alt="" class="h-100 w-100"></a>
 
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-12">
+                        <div class="col-lg-6 col-12 mt-5">
                             <div class="product__info__main">
                                 <h1><?= $des['book_name'] ?></h1>
                                 <div class="product-reviews-summary d-flex">
@@ -34,7 +35,7 @@ $des = mysqli_fetch_assoc(mysqli_query(connection(), "select * from books where 
                                         <li class="off"><i class="zmdi zmdi-star-outline"></i></li>
                                     </ul>
                                 </div>
-                                <div class="price-box d-flex gap-3">
+                                <div class="price-box d-flex gap-3 prices">
                                     <span>RS <?= $des['after_discount_price'] ?></span>
                                     <span class="text-danger text-decoration-line-through" style="font-size:medium">RS <?= $des['book_price'] ?></span>
                                 </div>
@@ -42,17 +43,28 @@ $des = mysqli_fetch_assoc(mysqli_query(connection(), "select * from books where 
                                     <p><?= substr($des['book_des'], 0, 500) ?></p>
                                 </div>
                                 <div class="box-tocart d-flex">
+                                    <span>Type</span>
+                                    <select class="input-text" name="type" id="type">
+                                        <option value="hardcover">Hardcover</option>
+                                        <?php if ($des['book_pdf'] == "yes") { ?>
+                                            <option value="pdf">PDF</option>
+                                        <?php } ?>
+                                    </select>
                                     <span>Qty</span>
+                                    <button class="btn border-0 decrease" style="box-shadow: none"><i class="fa fa-minus"></i></button>
                                     <input id="qty" class="input-text qty" name="qty" min="1" value="1"
-                                        title="Qty" type="number">
-                                    <div class="addtocart__actions">
-                                        <button class="tocart" type="submit" title="Add to Cart">Add to
-                                            Cart
-                                        </button>
-                                    </div>
+                                        title="Qty" type="number" readonly>
+                                    <button class="btn border-0 increase" style="box-shadow: none"><i class="fa fa-plus"></i></button>
                                     <div class="product-addto-links clearfix">
                                         <a class="wishlist" href="#"></a>
                                     </div>
+                                </div>
+                                <div class="box-tocart d-flex ">
+                                    <div class="addtocart__actions ">
+                                        <button class="tocart" type="sbutton" title="Add to Cart" id="addtocart">Add to Cart
+                                        </button>
+                                    </div>
+
                                 </div>
                                 <div class="product_meta">
                                     <span class="posted_in">Category:
@@ -211,7 +223,7 @@ $des = mysqli_fetch_assoc(mysqli_query(connection(), "select * from books where 
                 </div>
 
             </div>
-            <div class="col-lg-3 col-12 md-mt-40 sm-mt-40">
+            <div class="col-lg-3 col-12 md-mt-40 sm-mt-40 mt-5">
                 <div class="shop__sidebar">
                     <aside class="widget__categories products--cat">
                         <h3 class="widget__title">Product Categories</h3>
@@ -259,18 +271,19 @@ $des = mysqli_fetch_assoc(mysqli_query(connection(), "select * from books where 
                     <div class="row mt--60">
                         <div class="productcategory__slide--2 arrows_style owl-carousel owl-theme">
                             <?php
-                            $related = mysqli_query(connection(), "SELECT * FROM books ORDER BY RAND() LIMIT 6;");
+                            $category = $des['book_category'];
+                            $related = mysqli_query(connection(), "SELECT * FROM books where book_category = '$category' ORDER BY RAND() LIMIT 6 ");
                             foreach ($related as $row) {
                             ?>
                                 <!-- Start Single Product -->
                                 <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
-                                    <div class="product__thumb" style="height:550px;">
+                                    <div class="product__thumb" style="height:500px;">
                                         <a class="first__img h-100" href="single-product.html"><img
                                                 src="Images/books_images/<?= $row['book_img1'] ?>" alt="product image" class="h-100"></a>
                                         <a class="second__img animation1 h-100" href="single-product.html"><img
                                                 src="Images/books_images/<?= $row['book_img2'] ?>" alt="product image" class="h-100"></a>
                                         <div class="hot__box">
-                                            <span class="hot-label">BEST SALLER</span>
+                                            <span class="hot-label">BEST SELLER</span>
                                         </div>
                                     </div>
                                     <div class="product__content content--center">
@@ -288,7 +301,7 @@ $des = mysqli_fetch_assoc(mysqli_query(connection(), "select * from books where 
                                                                 class="bi bi-heart-beat"></i></a></li>
                                                     <li><a title="Quick View"
                                                             class="quickview modal-view detail-link"
-                                                            href="#productmodal"><i class="bi bi-search"></i></a>
+                                                            href="single_product.php?pid=<?= $row['id'] ?>"><i class="bi bi-search"></i></a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -322,6 +335,90 @@ $des = mysqli_fetch_assoc(mysqli_query(connection(), "select * from books where 
     include 'body_end.php';
     include 'footer.php'
     ?>
-    <!-- <script>
-        document.querySelector('#wn__header').classList.add('oth-page')
-    </script> -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $(document).ready(function() {
+            $('#addtocart').on('click', function() {
+                var pid = <?= $_GET['pid'] ?>;
+                var quantity = $('#qty').val();
+                var type = $('#type').val();
+                var user = "<?php if (isset($_SESSION['user'])) {
+                               echo $_SESSION['user'];
+                            } else {
+                                echo "false";
+                            } ?>";
+                if (user == "false") {
+                    Swal.fire({
+                        icon: "warning",
+                        title: "Oops...",
+                        text: "Please Login First",
+                        timer: 1500,
+                        toast: true
+                    });
+                } else {
+                    $.ajax({
+                        url: "code.php",
+                        method: "POST",
+                        data: {
+                            addCart_pid: pid,
+                            addCart_quantity: quantity,
+                            addCart_type: type,
+                            addCart_user: user
+                        },
+                        success: function(data) {
+                            if (data == "success") {
+                                Swal.fire({
+                                    icon: "success",
+                                    title: "Success",
+                                    text: "Product added to cart",
+                                    timer: 1500,
+                                    toast: true
+                                });
+                            } else if (data == "failed") {
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Oops...",
+                                    text: "Something went wrong, try again",
+                                    timer: 1500,
+                                    toast: true
+                                });
+                            } else {
+                                alert(data);
+                            }
+                        }
+                    })
+                }
+            })
+
+            $('#type').on('change', function() {
+                var type = $(this).val();
+                if (type == "hardcover") {
+                    $('.increase').show();
+                    $('.decrease').show();
+                    $('.prices').html(" <span>RS <?= $des['after_discount_price'] ?></span><span class='text-danger text-decoration-line-through' style='font-size:medium'>RS <?= $des['book_price'] ?></span>");
+                    $('#qty').val(1);
+                } else {
+                    $('.increase').hide();
+                    $('.decrease').hide();
+                    $('.prices').html(" <span>RS <?= $des['pdf_price'] ?></span>")
+                    $('#qty').val(1);
+
+                }
+            })
+
+            $('.decrease').on('click', function() {
+                var quantity = $('#qty').val();
+                quantity--;
+                if (quantity < 1) {
+                    quantity = 1;
+                }
+                $('#qty').val(quantity);
+            })
+
+            $('.increase').on('click', function() {
+                var quantity = $('#qty').val();
+                quantity++;
+                $('#qty').val(quantity);
+            })
+        })
+    </script>

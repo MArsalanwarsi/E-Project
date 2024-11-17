@@ -32,7 +32,6 @@ if (isset($_GET['category']) && isset($_GET['price'])) {
     $total_rows = mysqli_fetch_assoc(mysqli_query(connection(), "SELECT COUNT(*) AS total_rows FROM books"));
 }
 $total_pages = ceil($total_rows['total_rows'] / $per_page);
-
 ?>
 <!-- Start breadcrumb area -->
 <div class="p-5 bg-light"></div>
@@ -90,15 +89,14 @@ $total_pages = ceil($total_rows['total_rows'] / $per_page);
                                 <a class="nav-item nav-link" data-bs-toggle="tab" href="#nav-list" role="tab"><i
                                         class="fa fa-list"></i></a>
                             </div>
-                            <p>Showing 1–12 of 40 results</p>
                             <div class="orderby__wrapper">
                                 <span>Sort By</span>
-                                <select class="shot__byselect">
-                                    <option>Default sorting</option>
-                                    <option>Price Low to High</option>
-                                    <option>Price High to Low</option>
-                                    <option>Newest First</option>
-                                    <option>Oldest First</option>
+                                <select class="shot__byselect" id="sort_by">
+                                    <option value="1" <?php if (isset($_GET['sort_by']) && $_GET['sort_by'] == 1) echo 'selected'; ?>>Default</option>
+                                    <option value="2" <?php if (isset($_GET['sort_by']) && $_GET['sort_by'] == 2) echo 'selected'; ?>>Price Low to High</option>
+                                    <option value="3" <?php if (isset($_GET['sort_by']) && $_GET['sort_by'] == 3) echo 'selected'; ?>>Price High to Low</option>
+                                    <option value="4" <?php if (isset($_GET['sort_by']) && $_GET['sort_by'] == 4) echo 'selected'; ?>>Newest First</option>
+                                    <option value="5" <?php if (isset($_GET['sort_by']) && $_GET['sort_by'] == 5) echo 'selected'; ?>>Oldest First</option>
                                 </select>
                             </div>
                         </div>
@@ -140,13 +138,17 @@ include 'footer.php';
     var urlParams = new URLSearchParams(window.location.search);
     var category = urlParams.get('category');
     var price = urlParams.get('price');
+    var sortBy = urlParams.get('sort_by');
     $('.pagination_page').twbsPagination({
         totalPages: <?php echo $total_pages; ?>,
         visiblePages: 6,
+        startPage: 1,
+        hideOnlyOnePage: true,
+        currentPage: 1,
         next: 'Next',
         prev: 'Prev',
         onPageClick: function(event, page) {
-            if (category!=null && price!=null) {
+            if (category && price) {
                 $.ajax({
                     url: 'code.php',
                     type: 'POST',
@@ -156,7 +158,6 @@ include 'footer.php';
                         filter_shop_cat1: category
                     },
                     success: function(data) {
-                        alert(data);
                         $('.AllShopData1').html(data);
                     }
                 });
@@ -169,13 +170,13 @@ include 'footer.php';
                         filter_shop_cat2: category
                     },
                     success: function(data) {
-                        alert(data);
+
 
                         $('.AllShopData2').html(data);
 
                     }
                 });
-            } else if (price!=null) {
+            } else if (price) {
                 $.ajax({
                     url: 'code.php',
                     type: 'POST',
@@ -184,7 +185,7 @@ include 'footer.php';
                         filter_page1: page
                     },
                     success: function(data) {
-                        alert(data);
+
 
                         $('.AllShopData1').html(data);
                     }
@@ -197,22 +198,22 @@ include 'footer.php';
                         filter_page2: page
                     },
                     success: function(data) {
-                        alert(data);
+
 
                         $('.AllShopData2').html(data);
 
                     }
                 });
-            } else if (category!=null) {
+            } else if (category) {
                 $.ajax({
                     url: 'code.php',
                     type: 'POST',
                     data: {
                         shop_page_cat1: page,
-                        shop_category1: categosry
+                        shop_category1: category
                     },
                     success: function(data) {
-                        alert(data);
+
 
                         $('.AllShopData1').html(data);
                     }
@@ -225,8 +226,31 @@ include 'footer.php';
                         shop_category2: category
                     },
                     success: function(data) {
-                        alert(data);
 
+
+                        $('.AllShopData2').html(data);
+                    }
+                });
+            } else if (sortBy) {
+                $.ajax({
+                    url: 'code.php',
+                    type: 'POST',
+                    data: {
+                        sort_by1: sortBy,
+                        sort_page1: page
+                    },
+                    success: function(data) {
+                        $('.AllShopData1').html(data);
+                    }
+                });
+                $.ajax({
+                    url: 'code.php',
+                    type: 'POST',
+                    data: {
+                        sort_by2: sortBy,
+                        sort_page2: page
+                    },
+                    success: function(data) {
                         $('.AllShopData2').html(data);
                     }
                 });
@@ -238,7 +262,7 @@ include 'footer.php';
                         shop_page1: page
                     },
                     success: function(data) {
-                        alert(data);
+
 
                         $('.AllShopData1').html(data);
                     }
@@ -250,7 +274,7 @@ include 'footer.php';
                         shop_page2: page
                     },
                     success: function(data) {
-                        alert(data);
+
 
                         $('.AllShopData2').html(data);
                     }
@@ -293,79 +317,9 @@ include 'footer.php';
         // Redirect to the new URL
         window.location.href = currentUrl;
     });
-    $('.filter_btn').on('click', function() {
-        var price = $('#p_filter').val();
-        $.ajax({
-            url: 'code.php',
-            type: 'POST',
-            data: {
-                pages_checker: price
-            },
-            success: function(data) {
-                var total_pages = data;
 
-                $('.pagination_page').twbsPagination('destroy');
-                $('.pagination_page').twbsPagination({
-                    totalPages: total_pages,
-                    visiblePages: 6,
-                    next: 'Next',
-                    prev: 'Prev',
-                    onPageClick: function(event, page) {
-                        if (category) {
-                            $.ajax({
-                                url: 'code.php',
-                                type: 'POST',
-                                data: {
-                                    filter_cat_price1: price,
-                                    filter_page_cat1: page,
-                                    filter_shop_cat1: category
-                                },
-                                success: function(data) {
-                                    $('.AllShopData1').html(data);
-                                }
-                            });
-                            $.ajax({
-                                url: 'code.php',
-                                type: 'POST',
-                                data: {
-                                    filter_cat_price2: price,
-                                    filter_page_cat2: page,
-                                    filter_shop_cat2: category
-                                },
-                                success: function(data) {
-                                    $('.AllShopData2').html(data);
-
-                                }
-                            });
-                        } else {
-                            $.ajax({
-                                url: 'code.php',
-                                type: 'POST',
-                                data: {
-                                    filter_price1: price,
-                                    filter_page1: page
-                                },
-                                success: function(data) {
-                                    $('.AllShopData1').html(data);
-                                }
-                            });
-                            $.ajax({
-                                url: 'code.php',
-                                type: 'POST',
-                                data: {
-                                    filter_price2: price,
-                                    filter_page2: page
-                                },
-                                success: function(data) {
-                                    $('.AllShopData2').html(data);
-
-                                }
-                            });
-                        }
-
-                    }
-                });
-            }
-        })
+    $('#sort_by').on('change', function() {
+        var value = $(this).val();
+        window.location.assign('shop.php?sort_by=' + value);
     })
 </script>
