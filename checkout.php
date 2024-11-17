@@ -220,7 +220,7 @@ include 'footer.php';
                                 text: 'Order Placed Successfully. Please confirm your order from your email within 1 Hour or your order will be cancelled.',
                             }).then((result) => {
                                 if (result.isConfirmed) {
-                                    window.location.href = 'my-order.php';
+                                    window.location.href = 'orders.php';
                                 }
                             })
                         } else if(response == 'failed') {

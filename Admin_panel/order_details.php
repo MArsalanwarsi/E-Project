@@ -721,13 +721,13 @@
 			<div class="page-content">
 				<!--breadcrumb-->
 				<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-					<div class="breadcrumb-title pe-3">eCommerce</div>
+					<div class="breadcrumb-title pe-3">Applications</div>
 					<div class="ps-3">
 						<nav aria-label="breadcrumb">
 							<ol class="breadcrumb mb-0 p-0">
 								<li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
 								</li>
-								<li class="breadcrumb-item active" aria-current="page">Orders</li>
+								<li class="breadcrumb-item active" aria-current="page">Invoice</li>
 							</ol>
 						</nav>
 					</div>
@@ -745,266 +745,135 @@
 					</div>
 				</div>
 				<!--end breadcrumb-->
-			  
 				<div class="card">
 					<div class="card-body">
-						<div class="d-lg-flex align-items-center mb-4 gap-3">
-							<div class="position-relative">
-								<input type="text" class="form-control ps-5 radius-30" placeholder="Search Order"> <span class="position-absolute top-50 product-show translate-middle-y"><i class="bx bx-search"></i></span>
+						<div id="invoice">
+							<div class="toolbar hidden-print">
+								<div class="text-end">
+									<button type="button" class="btn btn-dark"><i class="fa fa-print"></i> Print</button>
+									<button type="button" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Export as PDF</button>
+								</div>
+								<hr/>
 							</div>
-						  <div class="ms-auto"><a href="javascript:;" class="btn btn-light radius-30 mt-2 mt-lg-0"><i class="bx bxs-plus-square"></i>Add New Order</a></div>
-						</div>
-						<div class="table-responsive">
-							<table class="table mb-0">
-								<thead class="table-light">
-									<tr>
-										<th>Order#</th>
-										<th>Company Name</th>
-										<th>Status</th>
-										<th>Total</th>
-										<th>Date</th>
-										<th>View Details</th>
-										<th>Actions</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>
-											<div class="d-flex align-items-center">
-												<div>
-													<input class="form-check-input me-3" type="checkbox" value="" aria-label="...">
-												</div>
-												<div class="ms-2">
-													<h6 class="mb-0 font-14">#OS-000354</h6>
-												</div>
+							<div class="invoice overflow-auto">
+								<div style="min-width: 600px">
+									<header>
+										<div class="row">
+											<div class="col">
+												<a href="javascript:;">
+													<img src="assets/images/logo-icon.png" width="80" alt="" />
+												</a>
 											</div>
-										</td>
-										<td>David Buckley</td>
-										<td><div class="badge rounded-pill bg-light p-2 text-uppercase px-3"><i class='bx bxs-circle me-1'></i>FulFilled</div></td>
-										<td>$485.20</td>
-										<td>June 10, 2020</td>
-										<td><button type="button" class="btn btn-light btn-sm radius-30 px-4">View Details</button></td>
-										<td>
-											<div class="d-flex order-actions">
-												<a href="javascript:;" class=""><i class='bx bxs-edit'></i></a>
-												<a href="javascript:;" class="ms-3"><i class='bx bxs-trash'></i></a>
+											<div class="col company-details">
+												<h2 class="name">
+									<a target="_blank" href="javascript:;">
+									Arboshiki
+									</a>
+								</h2>
+												<div>455 Foggy Heights, AZ 85004, US</div>
+												<div>(123) 456-789</div>
+												<div>company@example.com</div>
 											</div>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="d-flex align-items-center">
-												<div>
-													<input class="form-check-input me-3" type="checkbox" value="" aria-label="...">
-												</div>
-												<div class="ms-2">
-													<h6 class="mb-0 font-14">#OS-000986</h6>
+										</div>
+									</header>
+									<main>
+										<div class="row contacts">
+											<div class="col invoice-to">
+												<div class="text-gray-light">INVOICE TO:</div>
+												<h2 class="to">John Doe</h2>
+												<div class="address">796 Silver Harbour, TX 79273, US</div>
+												<div class="email"><a href="mailto:john@example.com">john@example.com</a>
 												</div>
 											</div>
-										</td>
-										<td>Gaspur Antunes</td>
-										<td><div class="badge rounded-pill bg-light p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>Confirmed</div></td>
-										<td>$650.30</td>
-										<td>June 12, 2020</td>
-										<td><button type="button" class="btn btn-light btn-sm radius-30 px-4">View Details</button></td>
-										<td>
-											<div class="d-flex order-actions">
-												<a href="javascript:;" class=""><i class='bx bxs-edit'></i></a>
-												<a href="javascript:;" class="ms-3"><i class='bx bxs-trash'></i></a>
+											<div class="col invoice-details">
+												<h1 class="invoice-id">INVOICE 3-2-1</h1>
+												<div class="date">Date of Invoice: 01/10/2018</div>
+												<div class="date">Due Date: 30/10/2018</div>
 											</div>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="d-flex align-items-center">
-												<div>
-													<input class="form-check-input me-3" type="checkbox" value="" aria-label="...">
-												</div>
-												<div class="ms-2">
-													<h6 class="mb-0 font-14">#OS-000536</h6>
-												</div>
-											</div>
-										</td>
-										<td>James Caviness</td>
-										<td><div class="badge rounded-pill bg-light p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>Partially shipped</div></td>
-										<td>$159.45</td>
-										<td>June 14, 2020</td>
-										<td><button type="button" class="btn btn-light btn-sm radius-30 px-4">View Details</button></td>
-										<td>
-											<div class="d-flex order-actions">
-												<a href="javascript:;" class=""><i class='bx bxs-edit'></i></a>
-												<a href="javascript:;" class="ms-3"><i class='bx bxs-trash'></i></a>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="d-flex align-items-center">
-												<div>
-													<input class="form-check-input me-3" type="checkbox" value="" aria-label="...">
-												</div>
-												<div class="ms-2">
-													<h6 class="mb-0 font-14">#OS-000678</h6>
-												</div>
-											</div>
-										</td>
-										<td>John Roman</td>
-										<td><div class="badge rounded-pill bg-light p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>FulFilled</div></td>
-										<td>$968.40</td>
-										<td>June 16, 2020</td>
-										<td><button type="button" class="btn btn-light btn-sm radius-30 px-4">View Details</button></td>
-										<td>
-											<div class="d-flex order-actions">
-												<a href="javascript:;" class=""><i class='bx bxs-edit'></i></a>
-												<a href="javascript:;" class="ms-3"><i class='bx bxs-trash'></i></a>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="d-flex align-items-center">
-												<div>
-													<input class="form-check-input me-3" type="checkbox" value="" aria-label="...">
-												</div>
-												<div class="ms-2">
-													<h6 class="mb-0 font-14">#OS-000457</h6>
-												</div>
-											</div>
-										</td>
-										<td>Johnny Seitz</td>
-										<td><div class="badge rounded-pill bg-light p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>Confirmed</div></td>
-										<td>$689.50</td>
-										<td>June 18, 2020</td>
-										<td><button type="button" class="btn btn-light btn-sm radius-30 px-4">View Details</button></td>
-										<td>
-											<div class="d-flex order-actions">
-												<a href="javascript:;" class=""><i class='bx bxs-edit'></i></a>
-												<a href="javascript:;" class="ms-3"><i class='bx bxs-trash'></i></a>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="d-flex align-items-center">
-												<div>
-													<input class="form-check-input me-3" type="checkbox" value="" aria-label="...">
-												</div>
-												<div class="ms-2">
-													<h6 class="mb-0 font-14">#OS-000685</h6>
-												</div>
-											</div>
-										</td>
-										<td>Lewis Cruz</td>
-										<td><div class="badge rounded-pill bg-light p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>Confirmed</div></td>
-										<td>$478.60</td>
-										<td>June 20, 2020</td>
-										<td><button type="button" class="btn btn-light btn-sm radius-30 px-4">View Details</button></td>
-										<td>
-											<div class="d-flex order-actions">
-												<a href="javascript:;" class=""><i class='bx bxs-edit'></i></a>
-												<a href="javascript:;" class="ms-3"><i class='bx bxs-trash'></i></a>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="d-flex align-items-center">
-												<div>
-													<input class="form-check-input me-3" type="checkbox" value="" aria-label="...">
-												</div>
-												<div class="ms-2">
-													<h6 class="mb-0 font-14">#OS-000356</h6>
-												</div>
-											</div>
-										</td>
-										<td>Michle Jhon</td>
-										<td><div class="badge rounded-pill bg-light p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>Partially shipped</div></td>
-										<td>$523.30</td>
-										<td>June 21, 2020</td>
-										<td><button type="button" class="btn btn-light btn-sm radius-30 px-4">View Details</button></td>
-										<td>
-											<div class="d-flex order-actions">
-												<a href="javascript:;" class=""><i class='bx bxs-edit'></i></a>
-												<a href="javascript:;" class="ms-3"><i class='bx bxs-trash'></i></a>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="d-flex align-items-center">
-												<div>
-													<input class="form-check-input me-3" type="checkbox" value="" aria-label="...">
-												</div>
-												<div class="ms-2">
-													<h6 class="mb-0 font-14">#OS-000875</h6>
-												</div>
-											</div>
-										</td>
-										<td>Peter Costanzo</td>
-										<td><div class="badge rounded-pill bg-light p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>FulFilled</div></td>
-										<td>$960.20</td>
-										<td>June 24, 2020</td>
-										<td><button type="button" class="btn btn-light btn-sm radius-30 px-4">View Details</button></td>
-										<td>
-											<div class="d-flex order-actions">
-												<a href="javascript:;" class=""><i class='bx bxs-edit'></i></a>
-												<a href="javascript:;" class="ms-3"><i class='bx bxs-trash'></i></a>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="d-flex align-items-center">
-												<div>
-													<input class="form-check-input me-3" type="checkbox" value="" aria-label="...">
-												</div>
-												<div class="ms-2">
-													<h6 class="mb-0 font-14">#OS-000658</h6>
-												</div>
-											</div>
-										</td>
-										<td>Ralph Alva</td>
-										<td><div class="badge rounded-pill bg-light p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>FulFilled</div></td>
-										<td>$428.10</td>
-										<td>June 25, 2020</td>
-										<td><button type="button" class="btn btn-light btn-sm radius-30 px-4">View Details</button></td>
-										<td>
-											<div class="d-flex order-actions">
-												<a href="javascript:;" class=""><i class='bx bxs-edit'></i></a>
-												<a href="javascript:;" class="ms-3"><i class='bx bxs-trash'></i></a>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="d-flex align-items-center">
-												<div>
-													<input class="form-check-input me-3" type="checkbox" value="" aria-label="...">
-												</div>
-												<div class="ms-2">
-													<h6 class="mb-0 font-14">#OS-000689</h6>
-												</div>
-											</div>
-										</td>
-										<td>Thomas Wheeler</td>
-										<td><div class="badge rounded-pill bg-light p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>Partially shipped</div></td>
-										<td>$876.60</td>
-										<td>June 26, 2020</td>
-										<td><button type="button" class="btn btn-light btn-sm radius-30 px-4">View Details</button></td>
-										<td>
-											<div class="d-flex order-actions">
-												<a href="javascript:;" class=""><i class='bx bxs-edit'></i></a>
-												<a href="javascript:;" class="ms-3"><i class='bx bxs-trash'></i></a>
-											</div>
-										</td>
-									</tr>
-								</tbody>
-							</table>
+										</div>
+										<table>
+											<thead>
+												<tr>
+													<th>#</th>
+													<th class="text-left">DESCRIPTION</th>
+													<th class="text-right">HOUR PRICE</th>
+													<th class="text-right">HOURS</th>
+													<th class="text-right">TOTAL</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td class="no">04</td>
+													<td class="text-left">
+														<h3>
+										<a target="_blank" href="javascript:;">
+										Youtube channel
+										</a>
+										</h3>
+														<a target="_blank" href="javascript:;">
+										   Useful videos
+									   </a> to improve your Javascript skills. Subscribe and stay tuned :)</td>
+													<td class="unit">$0.00</td>
+													<td class="qty">100</td>
+													<td class="total">$0.00</td>
+												</tr>
+												<tr>
+													<td class="no">01</td>
+													<td class="text-left">
+														<h3>Website Design</h3>Creating a recognizable design solution based on the company's existing visual identity</td>
+													<td class="unit">$40.00</td>
+													<td class="qty">30</td>
+													<td class="total">$1,200.00</td>
+												</tr>
+												<tr>
+													<td class="no">02</td>
+													<td class="text-left">
+														<h3>Website Development</h3>Developing a Content Management System-based Website</td>
+													<td class="unit">$40.00</td>
+													<td class="qty">80</td>
+													<td class="total">$3,200.00</td>
+												</tr>
+												<tr>
+													<td class="no">03</td>
+													<td class="text-left">
+														<h3>Search Engines Optimization</h3>Optimize the site for search engines (SEO)</td>
+													<td class="unit">$40.00</td>
+													<td class="qty">20</td>
+													<td class="total">$800.00</td>
+												</tr>
+											</tbody>
+											<tfoot>
+												<tr>
+													<td colspan="2"></td>
+													<td colspan="2">SUBTOTAL</td>
+													<td>$5,200.00</td>
+												</tr>
+												<tr>
+													<td colspan="2"></td>
+													<td colspan="2">TAX 25%</td>
+													<td>$1,300.00</td>
+												</tr>
+												<tr>
+													<td colspan="2"></td>
+													<td colspan="2">GRAND TOTAL</td>
+													<td>$6,500.00</td>
+												</tr>
+											</tfoot>
+										</table>
+										<div class="thanks">Thank you!</div>
+										<div class="notices">
+											<div>NOTICE:</div>
+											<div class="notice">A finance charge of 1.5% will be made on unpaid balances after 30 days.</div>
+										</div>
+									</main>
+									<footer>Invoice was created on a computer and is valid without the signature and seal.</footer>
+								</div>
+								<!--DO NOT DELETE THIS div. IT is responsible for showing footer always at the bottom-->
+								<div></div>
+							</div>
 						</div>
 					</div>
 				</div>
-
-
 			</div>
 		</div>
 		<!--end page wrapper -->
@@ -1029,21 +898,19 @@
 			</div>
 			<hr/>
 			<p class="mb-0">Gaussian Texture</p>
-			  <hr>
-			  
-			  <ul class="switcher">
+			<hr>
+			<ul class="switcher">
 				<li id="theme1"></li>
 				<li id="theme2"></li>
 				<li id="theme3"></li>
 				<li id="theme4"></li>
 				<li id="theme5"></li>
 				<li id="theme6"></li>
-			  </ul>
-               <hr>
-			  <p class="mb-0">Gradient Background</p>
-			  <hr>
-			  
-			  <ul class="switcher">
+			</ul>
+			<hr>
+			<p class="mb-0">Gradient Background</p>
+			<hr>
+			<ul class="switcher">
 				<li id="theme7"></li>
 				<li id="theme8"></li>
 				<li id="theme9"></li>

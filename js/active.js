@@ -496,6 +496,10 @@
   $(".center").slick({
     centerMode: true,
     centerPadding: "0px",
+    autoplay: true,
+    autoplaySpeed: 2000,
+    pauseOnFocus: false,
+    pauseOnHover: false,
     slidesToShow: 7,
     responsive: [
       {

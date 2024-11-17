@@ -28,6 +28,9 @@ if (isset($_POST['signup_name'])) {
   } else {
     $newdata = mysqli_query(connection(), "INSERT INTO users (name, email, password,role) VALUES ('$name', '$email', '$password', 'user')");
     if ($newdata) {
+      $select_id = mysqli_query(connection(), "SELECT * FROM users WHERE email = '$email' && role = 'user'");
+      $row = mysqli_fetch_assoc($select_id);
+      mysqli_query(connection(), "insert into user_details(user_id) values('$row[id]')");
       $_SESSION['user'] = $email;
       echo "success";
     } else {
@@ -906,7 +909,7 @@ if (isset($_POST['order_name'])) {
       $delete = mysqli_query(connection(), "DELETE FROM cart WHERE user_id='" . $_SESSION['user'] . "' AND book_id='" . $c['book_id'] . "'");
       if ($delete) {
         $echo = "success";
-        $select=mysqli_query(connection(), "select * from orders where user_id='".$_SESSION['user']."' and book_name='$book_name' and type='$c[type]' and author='$author' and full_name='$order_name'");
+        $select=mysqli_query(connection(), "select * from orders where user_id='".$_SESSION['user']."' order by id desc limit 1");
         $data=mysqli_fetch_assoc($select);
         $order_id=$data['id'];
         $confirmOrderUrl="http://localhost/Arsalan%20php/E-Project%20Books/code.php?orderconfirmation=$order_id";
@@ -1044,4 +1047,14 @@ if (isset($_POST['order_name'])) {
     }
   }
   echo $echo;
+}
+
+// order confirmation
+if (isset($_GET['orderconfirmation'])) {
+  $id = $_GET['orderconfirmation'];
+  $query = "UPDATE orders SET status = 'payment pending' WHERE id = '$id'";
+  $result = mysqli_query(connection(), $query);
+  if ($result) {
+    header("Location: order_confirmed.html");
+  }
 }

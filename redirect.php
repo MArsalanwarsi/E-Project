@@ -22,6 +22,9 @@ if(isset($_GET['code'])){
     } else {
         $sql = mysqli_query(connection(), "INSERT INTO users (name, email,role) VALUES ('$usern_name', '$user_email', 'user')");
         if ($sql) {
+            $select_id=mysqli_query(connection(), "SELECT * FROM users WHERE email = '$user_email' && role = 'user'");
+            $row = mysqli_fetch_assoc($select_id);
+            mysqli_query(connection(), "insert into user_details(user_id) values('$row[id]')");
             $_SESSION['user'] = $user_email;
             header('location: index.php');
         }

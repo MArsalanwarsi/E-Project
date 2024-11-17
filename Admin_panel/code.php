@@ -315,6 +315,7 @@ if (isset($_POST['add_admin_name'])) {
 
 if (isset($_POST['event_title'])) {
     $event_title = $_POST['event_title'];
+    $event_title = mysqli_real_escape_string(connection(), $event_title);
     $event_rewards = $_POST['event_rewards'];
     $event_rewards = mysqli_real_escape_string(connection(), $event_rewards);
     $event_description = $_POST['event_description'];
@@ -474,4 +475,17 @@ if (isset($_POST['part_status_id'])) {
         echo "failed";
     }
 
+}
+
+// update order status
+if (isset($_POST['order_update_id'])) {
+    $id = $_POST['order_update_id'];
+    $status = $_POST['order_update_value'];
+    $sql = "UPDATE orders SET status = '$status' WHERE id = '$id'";
+    $result = mysqli_query(connection(), $sql);
+    if ($result) {
+        echo "success";
+    } else {
+        echo "failed";
+    }
 }

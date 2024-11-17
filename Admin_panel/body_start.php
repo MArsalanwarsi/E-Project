@@ -34,8 +34,6 @@
                         </li>
                         <li> <a href="add_new_products.php"><i class="bx bx-right-arrow-alt"></i>Add New Products</a>
                         </li>
-                        <li> <a href="ecommerce-orders.html"><i class="bx bx-right-arrow-alt"></i>Orders</a>
-                        </li>
                     </ul>
                 </li>
                 <li>
@@ -59,9 +57,13 @@
                         <div class="menu-title">Orders</div>
                     </a>
                     <ul>
-                        <li> <a href="All_Orders.php"><i class="bx bx-right-arrow-alt"></i>All Orders</a>
+                        <li> <a href="All_orders.php"><i class="bx bx-right-arrow-alt"></i>All Orders</a>
                         </li>
-                        <li> <a href="Pending_Orders.php"><i class="bx bx-right-arrow-alt"></i>Pending Orders</a>
+                        <li> <a href="Pending_Orders.php"><i class="bx bx-right-arrow-alt"></i>UnConfirmed Orders</a>
+                        </li>
+                        <li> <a href="Pending_Orders.php"><i class="bx bx-right-arrow-alt"></i>Pending Payment Orders</a>
+                        </li>
+                        <li> <a href="Pending_Orders.php"><i class="bx bx-right-arrow-alt"></i>Payed Orders</a>
                         </li>
                         <li> <a href="Shipped_Orders.php"><i class="bx bx-right-arrow-alt"></i>Shipped Orders</a>
                         </li>

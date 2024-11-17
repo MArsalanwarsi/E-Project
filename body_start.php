@@ -20,31 +20,29 @@
                                 </li>
                                 <li class=""><a href="shop.php">Shop</a>
                                 </li>
-                                <li class="drop"><a href="shop-grid.html">Books</a>
+                                <li class="drop"><a type="button">Books</a>
                                     <div class="megamenu mega03">
                                         <ul class="item item03">
-                                            <li class="title">Categories</li>
-                                            <li><a href="shop-grid.html">Biography </a></li>
-                                            <li><a href="shop-grid.html">Business </a></li>
-                                            <li><a href="shop-grid.html">Cookbooks </a></li>
-                                            <li><a href="shop-grid.html">Health & Fitness </a></li>
-                                            <li><a href="shop-grid.html">History </a></li>
+                                            <li class="title"></li>
+                                            <?php
+                                            $cate = mysqli_query(connection(), "select * from categories");
+                                            $i = 0;
+                                            foreach ($cate as $c) {
+                                                $i++;
+                                            ?>
+                                                <li><a href="shop.php?category=<?php echo $c['category_name'] ?>"><?php echo $c['category_name'] ?></a></li>
+
+                                                <?php
+                                                if ($i == 5) {
+                                                    $i=0;
+                                                ?>
                                         </ul>
                                         <ul class="item item03">
-                                            <li class="title">Customer Favourite</li>
-                                            <li><a href="shop-grid.html">Mystery</a></li>
-                                            <li><a href="shop-grid.html">Religion & Inspiration</a></li>
-                                            <li><a href="shop-grid.html">Romance</a></li>
-                                            <li><a href="shop-grid.html">Fiction/Fantasy</a></li>
-                                            <li><a href="shop-grid.html">Sleeveless</a></li>
-                                        </ul>
-                                        <ul class="item item03">
-                                            <li class="title">Collections</li>
-                                            <li><a href="shop-grid.html">Science </a></li>
-                                            <li><a href="shop-grid.html">Fiction/Fantasy</a></li>
-                                            <li><a href="shop-grid.html">Self-Improvemen</a></li>
-                                            <li><a href="shop-grid.html">Home & Garden</a></li>
-                                            <li><a href="shop-grid.html">Humor Books</a></li>
+                                        <li class="title"></li>
+                                    <?php
+                                                }
+                                            }
+                                    ?>
                                         </ul>
                                     </div>
                                 </li>
@@ -57,7 +55,16 @@
                     <div class="col-md-6 col-sm-6 col-6 col-lg-2">
                         <ul class="header__sidebar__right d-flex justify-content-end align-items-center">
                             <li class="shop_search"><a class="search__active" href="#"></a></li>
-                            <li class="wishlist"><a href="#"></a></li>
+                            <?php if (isset($_SESSION['user'])) {
+                            ?>
+                            <li class="wishlist"><a href="wishlist.html"></a></li>
+                            <?php
+                            }else{
+                            ?>
+                            <li class="wishlist"><a href="user_signin.php"></a></li>
+                            <?php
+                            }
+                            ?>
                             <li class="shopcart"><a class="" href="cart.php"><span
                                         class="product_qun" id="cart_count">0</span></a>
                             </li>
@@ -75,7 +82,8 @@
                                                             // get current page url
                                                             $current_page = $_SERVER['REQUEST_URI'];
                                                         ?>
-                                                            <span><a href="#">My Account</a></span>
+                                                            <span><a href="user_profile.php">My Account</a></span>
+                                                            <span><a href="orders.php">My Orders</a></span>
                                                             <span><a href="logout.php?redirect=<?= $current_page ?>">Logout</a></span>
                                                         <?php
                                                         } else { ?>
@@ -104,10 +112,12 @@
                                 </li>
                                 <li><a href="">Books</a>
                                     <ul>
-                                        <li><a href="blog.html">Blog Page</a></li>
-                                        <li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
-                                        <li><a href="blog-no-sidebar.html">Blog No Sidebar</a></li>
-                                        <li><a href="blog-details.html">Blog Details</a></li>
+                                        <?php
+                                         $cate = mysqli_query(connection(), "select * from categories");
+                                         foreach ($cate as $c) {
+                                        ?>
+                                            <li><a href="shop.php?category=<?php echo $c['category_name'] ?>"><?php echo $c['category_name'] ?></a></li>
+                                        <?php } ?>
                                     </ul>
                                 </li>
                                 <li><a href="">About</a></li>
