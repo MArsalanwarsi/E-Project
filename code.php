@@ -364,10 +364,10 @@ if (isset($_POST['shop_category1'])) {
     foreach ($result as $b) {
       $data .= " <div class='product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12'>
                                     <div class='product__thumb' style='height: 400px;'>
-                                        <a class='first__img h-100' href='single-product.html'><img
+                                        <a class='first__img h-100' href='single_product.php?pid=" . $b['id'] . "'><img
                                                 src='images/books_images/" . $b['book_img1'] . "'
                                                 alt='product image' class='h-100'></a>
-                                        <a class='second__img animation1 h-100' href='single-product.html'><img
+                                        <a class='second__img animation1' href='single_product.php?pid=" . $b['id'] . "'><img
                                                 src='images/books_images/" . $b['book_img2'] . "'
                                                 alt='product image' class='h-100'></a>
                                         <div class='hot__box'>
@@ -375,17 +375,17 @@ if (isset($_POST['shop_category1'])) {
                                         </div>
                                     </div>
                                     <div class='product__content content--center'>
-                                        <h4><a href='single-product.html'>" . $b['book_name'] . "</a></h4>
+                                        <h4><a href='single_product.php?pid=" . $b['id'] . "'>" . $b['book_name'] . "</a></h4>
                                         <ul class='price d-flex'>
-                                            <li>RS " . $b['book_price'] . "</li>
+                                            <li class='text-danger text-decoration-line-through' style='font-size:11.5px'>RS " . $b['book_price'] . "</li>
+                                            <li>RS " . $b['after_discount_price'] . "</li>
                                         </ul>
                                         <div class='action'>
                                             <div class='actions_inner'>
                                                 <ul class='add_to_links'>
                                                     <li><a class='cart' href='cart.html'><i
                                                                 class='bi bi-shopping-bag4'></i></a></li>
-                                                    <li><a class='wishlist' href='wishlist.html'><i
-                                                                class='bi bi-shopping-cart-full'></i></a></li>
+                                                  
                                                     <li><a class='compare' href='#'><i
                                                                 class='bi bi-heart-beat'></i></a></li>
                                                 </ul>
@@ -417,13 +417,13 @@ if (isset($_POST['shop_category2'])) {
                             <!-- Start Single Product -->
                             <div class='list__view mb-2'>
                                 <div class='thumb' style='height: 400px;'>
-                                    <a class='first__img h-100' href='single-product.html'><img
+                                    <a class='first__img h-100' href='single_product.php?pid=" . $b['id'] . "'><img
                                             src='images/books_images/" . $b['book_img1'] . "' class='h-100'></a>
-                                    <a class='second__img animation1 h-100' href='single-product.html'><img
+                                    <a class='second__img animation1 h-100' href='single_product.php?pid=" . $b['id'] . "'><img
                                             src='images/books_images/" . $b['book_img2'] . "' alt='product images' class='h-100'></a>
                                 </div>
                                 <div class='content'>
-                                    <h2><a href='single-product.html'>Ali Smith</a></h2>
+                                    <h2><a href='single_product.php?pid=" . $b['id'] . "'>Ali Smith</a></h2>
                                     <ul class='rating d-flex'>
                                         <li class='on'><i class='fa fa-star-o'></i></li>
                                         <li class='on'><i class='fa fa-star-o'></i></li>
@@ -478,36 +478,36 @@ if (isset($_POST['filter_cat_price1'])) {
     $data = "";
     foreach ($result as $b) {
       $data .= " <div class='product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12'>
-                                      <div class='product__thumb' style='height: 400px;'>
-                                          <a class='first__img h-100' href='single-product.html'><img
-                                                  src='images/books_images/" . $b['book_img1'] . "'
-                                                  alt='product image' class='h-100'></a>
-                                          <a class='second__img animation1 h-100' href='single-product.html'><img
-                                                  src='images/books_images/" . $b['book_img2'] . "'
-                                                  alt='product image' class='h-100'></a>
-                                          <div class='hot__box'>
-                                              <span class='hot-label'>BEST SALLER</span>
-                                          </div>
-                                      </div>
-                                      <div class='product__content content--center'>
-                                          <h4><a href='single-product.html'>" . $b['book_name'] . "</a></h4>
-                                          <ul class='price d-flex'>
-                                              <li>RS " . $b['book_price'] . "</li>
-                                          </ul>
-                                          <div class='action'>
-                                              <div class='actions_inner'>
-                                                  <ul class='add_to_links'>
-                                                      <li><a class='cart' href='cart.html'><i
-                                                                  class='bi bi-shopping-bag4'></i></a></li>
-                                                      <li><a class='wishlist' href='wishlist.html'><i
-                                                                  class='bi bi-shopping-cart-full'></i></a></li>
-                                                      <li><a class='compare' href='#'><i
-                                                                  class='bi bi-heart-beat'></i></a></li>
-                                                  </ul>
-                                              </div>
-                                          </div>
-                                      </div>
-                                  </div>";
+                                    <div class='product__thumb' style='height: 400px;'>
+                                        <a class='first__img h-100' href='single_product.php?pid=" . $b['id'] . "'><img
+                                                src='images/books_images/" . $b['book_img1'] . "'
+                                                alt='product image' class='h-100'></a>
+                                        <a class='second__img animation1' href='single_product.php?pid=" . $b['id'] . "'><img
+                                                src='images/books_images/" . $b['book_img2'] . "'
+                                                alt='product image' class='h-100'></a>
+                                        <div class='hot__box'>
+                                            <span class='hot-label'>BEST SALLER</span>
+                                        </div>
+                                    </div>
+                                    <div class='product__content content--center'>
+                                        <h4><a href='single_product.php?pid=" . $b['id'] . "'>" . $b['book_name'] . "</a></h4>
+                                        <ul class='price d-flex'>
+                                            <li class='text-danger text-decoration-line-through' style='font-size:11.5px'>RS " . $b['book_price'] . "</li>
+                                            <li>RS " . $b['after_discount_price'] . "</li>
+                                        </ul>
+                                        <div class='action'>
+                                            <div class='actions_inner'>
+                                                <ul class='add_to_links'>
+                                                    <li><a class='cart' href='cart.html'><i
+                                                                class='bi bi-shopping-bag4'></i></a></li>
+                                                  
+                                                    <li><a class='compare' href='#'><i
+                                                                class='bi bi-heart-beat'></i></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>";
     }
   } else {
     $data = "No data found";
@@ -536,13 +536,13 @@ if (isset($_POST['filter_cat_price2'])) {
                             <!-- Start Single Product -->
                             <div class='list__view mb-2'>
                                 <div class='thumb' style='height: 400px;'>
-                                    <a class='first__img h-100' href='single-product.html'><img
+                                    <a class='first__img h-100' href='single_product.php?pid=" . $b['id'] . "'><img
                                             src='images/books_images/" . $b['book_img1'] . "' class='h-100'></a>
-                                    <a class='second__img animation1 h-100' href='single-product.html'><img
+                                    <a class='second__img animation1 h-100' href='single_product.php?pid=" . $b['id'] . "'><img
                                             src='images/books_images/" . $b['book_img2'] . "' alt='product images' class='h-100'></a>
                                 </div>
                                 <div class='content'>
-                                    <h2><a href='single-product.html'>Ali Smith</a></h2>
+                                    <h2><a href='single_product.php?pid=" . $b['id'] . "'>Ali Smith</a></h2>
                                     <ul class='rating d-flex'>
                                         <li class='on'><i class='fa fa-star-o'></i></li>
                                         <li class='on'><i class='fa fa-star-o'></i></li>
@@ -593,37 +593,37 @@ if (isset($_POST['filter_price1'])) {
   if (mysqli_num_rows($result) > 0) {
     $data = "";
     foreach ($result as $b) {
-      $data .= " <div class='product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12'>
-                                      <div class='product__thumb' style='height: 400px;'>
-                                          <a class='first__img h-100' href='single-product.html'><img
-                                                  src='images/books_images/" . $b['book_img1'] . "'
-                                                  alt='product image' class='h-100'></a>
-                                          <a class='second__img animation1 h-100' href='single-product.html'><img
-                                                  src='images/books_images/" . $b['book_img2'] . "'
-                                                  alt='product image' class='h-100'></a>
-                                          <div class='hot__box'>
-                                              <span class='hot-label'>BEST SALLER</span>
-                                          </div>
-                                      </div>
-                                      <div class='product__content content--center'>
-                                          <h4><a href='single-product.html'>" . $b['book_name'] . "</a></h4>
-                                          <ul class='price d-flex'>
-                                              <li>RS " . $b['book_price'] . "</li>
-                                          </ul>
-                                          <div class='action'>
-                                              <div class='actions_inner'>
-                                                  <ul class='add_to_links'>
-                                                      <li><a class='cart' href='cart.html'><i
-                                                                  class='bi bi-shopping-bag4'></i></a></li>
-                                                      <li><a class='wishlist' href='wishlist.html'><i
-                                                                  class='bi bi-shopping-cart-full'></i></a></li>
-                                                      <li><a class='compare' href='#'><i
-                                                                  class='bi bi-heart-beat'></i></a></li>
-                                                  </ul>
-                                              </div>
-                                          </div>
-                                      </div>
-                                  </div>";
+      $data .= "<div class='product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12'>
+                                    <div class='product__thumb' style='height: 400px;'>
+                                        <a class='first__img h-100' href='single_product.php?pid=" . $b['id'] . "'><img
+                                                src='images/books_images/" . $b['book_img1'] . "'
+                                                alt='product image' class='h-100'></a>
+                                        <a class='second__img animation1' href='single_product.php?pid=" . $b['id'] . "'><img
+                                                src='images/books_images/" . $b['book_img2'] . "'
+                                                alt='product image' class='h-100'></a>
+                                        <div class='hot__box'>
+                                            <span class='hot-label'>BEST SALLER</span>
+                                        </div>
+                                    </div>
+                                    <div class='product__content content--center'>
+                                        <h4><a href='single_product.php?pid=" . $b['id'] . "'>" . $b['book_name'] . "</a></h4>
+                                        <ul class='price d-flex'>
+                                            <li class='text-danger text-decoration-line-through' style='font-size:11.5px'>RS " . $b['book_price'] . "</li>
+                                            <li>RS " . $b['after_discount_price'] . "</li>
+                                        </ul>
+                                        <div class='action'>
+                                            <div class='actions_inner'>
+                                                <ul class='add_to_links'>
+                                                    <li><a class='cart' href='cart.html'><i
+                                                                class='bi bi-shopping-bag4'></i></a></li>
+                                                  
+                                                    <li><a class='compare' href='#'><i
+                                                                class='bi bi-heart-beat'></i></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>";
     }
   } else {
     $data = "No data found";
@@ -647,17 +647,17 @@ if (isset($_POST['filter_price2'])) {
   if (mysqli_num_rows($result) > 0) {
     $data = "";
     foreach ($result as $b) {
-      $data .= "<div class='list__view__wrapper'>
+      $data .= " <div class='list__view__wrapper'>
                             <!-- Start Single Product -->
                             <div class='list__view mb-2'>
                                 <div class='thumb' style='height: 400px;'>
-                                    <a class='first__img h-100' href='single-product.html'><img
+                                    <a class='first__img h-100' href='single_product.php?pid=" . $b['id'] . "'><img
                                             src='images/books_images/" . $b['book_img1'] . "' class='h-100'></a>
-                                    <a class='second__img animation1 h-100' href='single-product.html'><img
+                                    <a class='second__img animation1 h-100' href='single_product.php?pid=" . $b['id'] . "'><img
                                             src='images/books_images/" . $b['book_img2'] . "' alt='product images' class='h-100'></a>
                                 </div>
                                 <div class='content'>
-                                    <h2><a href='single-product.html'>Ali Smith</a></h2>
+                                    <h2><a href='single_product.php?pid=" . $b['id'] . "'>Ali Smith</a></h2>
                                     <ul class='rating d-flex'>
                                         <li class='on'><i class='fa fa-star-o'></i></li>
                                         <li class='on'><i class='fa fa-star-o'></i></li>
@@ -719,13 +719,13 @@ if (isset($_POST['sort_by2'])) {
                             <!-- Start Single Product -->
                             <div class='list__view mb-2'>
                                 <div class='thumb' style='height: 400px;'>
-                                    <a class='first__img h-100' href='single-product.html'><img
+                                    <a class='first__img h-100' href='single_product.php?pid=" . $b['id'] . "'><img
                                             src='images/books_images/" . $b['book_img1'] . "' class='h-100'></a>
-                                    <a class='second__img animation1 h-100' href='single-product.html'><img
+                                    <a class='second__img animation1 h-100' href='single_product.php?pid=" . $b['id'] . "'><img
                                             src='images/books_images/" . $b['book_img2'] . "' alt='product images' class='h-100'></a>
                                 </div>
                                 <div class='content'>
-                                    <h2><a href='single-product.html'>Ali Smith</a></h2>
+                                    <h2><a href='single_product.php?pid=" . $b['id'] . "'>Ali Smith</a></h2>
                                     <ul class='rating d-flex'>
                                         <li class='on'><i class='fa fa-star-o'></i></li>
                                         <li class='on'><i class='fa fa-star-o'></i></li>
@@ -783,36 +783,36 @@ if (isset($_POST['sort_by1'])) {
     $data = "";
     foreach ($result as $b) {
       $data .= " <div class='product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12'>
-                                      <div class='product__thumb' style='height: 400px;'>
-                                          <a class='first__img h-100' href='single-product.html'><img
-                                                  src='images/books_images/" . $b['book_img1'] . "'
-                                                  alt='product image' class='h-100'></a>
-                                          <a class='second__img animation1 h-100' href='single-product.html'><img
-                                                  src='images/books_images/" . $b['book_img2'] . "'
-                                                  alt='product image' class='h-100'></a>
-                                          <div class='hot__box'>
-                                              <span class='hot-label'>BEST SALLER</span>
-                                          </div>
-                                      </div>
-                                      <div class='product__content content--center'>
-                                          <h4><a href='single-product.html'>" . $b['book_name'] . "</a></h4>
-                                          <ul class='price d-flex'>
-                                              <li>RS " . $b['after_discount_price'] . "</li>
-                                          </ul>
-                                          <div class='action'>
-                                              <div class='actions_inner'>
-                                                  <ul class='add_to_links'>
-                                                      <li><a class='cart' href='cart.html'><i
-                                                                  class='bi bi-shopping-bag4'></i></a></li>
-                                                      <li><a class='wishlist' href='wishlist.html'><i
-                                                                  class='bi bi-shopping-cart-full'></i></a></li>
-                                                      <li><a class='compare' href='#'><i
-                                                                  class='bi bi-heart-beat'></i></a></li>
-                                                  </ul>
-                                              </div>
-                                          </div>
-                                      </div>
-                                  </div>";
+                                    <div class='product__thumb' style='height: 400px;'>
+                                        <a class='first__img h-100' href='single_product.php?pid=" . $b['id'] . "'><img
+                                                src='images/books_images/" . $b['book_img1'] . "'
+                                                alt='product image' class='h-100'></a>
+                                        <a class='second__img animation1' href='single_product.php?pid=" . $b['id'] . "'><img
+                                                src='images/books_images/" . $b['book_img2'] . "'
+                                                alt='product image' class='h-100'></a>
+                                        <div class='hot__box'>
+                                            <span class='hot-label'>BEST SALLER</span>
+                                        </div>
+                                    </div>
+                                    <div class='product__content content--center'>
+                                        <h4><a href='single_product.php?pid=" . $b['id'] . "'>" . $b['book_name'] . "</a></h4>
+                                        <ul class='price d-flex'>
+                                            <li class='text-danger text-decoration-line-through' style='font-size:11.5px'>RS " . $b['book_price'] . "</li>
+                                            <li>RS " . $b['after_discount_price'] . "</li>
+                                        </ul>
+                                        <div class='action'>
+                                            <div class='actions_inner'>
+                                                <ul class='add_to_links'>
+                                                    <li><a class='cart' href='cart.html'><i
+                                                                class='bi bi-shopping-bag4'></i></a></li>
+                                                  
+                                                    <li><a class='compare' href='#'><i
+                                                                class='bi bi-heart-beat'></i></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>";
     }
   } else {
     $data = "No data found";
@@ -909,10 +909,10 @@ if (isset($_POST['order_name'])) {
       $delete = mysqli_query(connection(), "DELETE FROM cart WHERE user_id='" . $_SESSION['user'] . "' AND book_id='" . $c['book_id'] . "'");
       if ($delete) {
         $echo = "success";
-        $select=mysqli_query(connection(), "select * from orders where user_id='".$_SESSION['user']."' order by id desc limit 1");
-        $data=mysqli_fetch_assoc($select);
-        $order_id=$data['id'];
-        $confirmOrderUrl="http://localhost/Arsalan%20php/E-Project%20Books/code.php?orderconfirmation=$order_id";
+        $select = mysqli_query(connection(), "select * from orders where user_id='" . $_SESSION['user'] . "' order by id desc limit 1");
+        $data = mysqli_fetch_assoc($select);
+        $order_id = $data['id'];
+        $confirmOrderUrl = "http://localhost/Arsalan%20php/E-Project%20Books/code.php?orderconfirmation=$order_id";
         try {
           //Server settings
           $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
@@ -1016,8 +1016,8 @@ if (isset($_POST['order_name'])) {
                 <p>Dear <b>$order_name</b>,</p>
                 <p>Thank you for your order! We're excited to let you know that your order has been successfully placed.</p>
                 <p>Book Name: <b>$book_name</b> (Author: <b>$author</b>) </p>
-                <p>Quantity: <b>".$c['quantity']."</b></p>
-                <p>Type: <b>".$c['type']."</b></p>
+                <p>Quantity: <b>" . $c['quantity'] . "</b></p>
+                <p>Type: <b>" . $c['type'] . "</b></p>
                 <p>The total amount is: <b>$price</b></p>
                 <p>Your order has been placed on <b>$order_date</b></p>
                 <h3>Please Confirm Your Order within 1 Hour or Your Order Will be Canceled</h3>
@@ -1058,3 +1058,65 @@ if (isset($_GET['orderconfirmation'])) {
     header("Location: order_confirmed.html");
   }
 }
+
+
+// contact us
+// Contact Us
+// if (isset($_POST['contact_send'])) {
+//   // Initialize variables and validate inputs
+//   $name = trim($_POST['contact_name']);
+//   $email = trim($_POST['contact_email']);
+//   $subject = trim($_POST['contact_subject']);
+//   $message = trim($_POST['contact_message']);
+
+//   // Input validation
+//   if (empty($name) || empty($email) || empty($subject) || empty($message)) {
+//     echo "All fields are required.";
+//     exit;
+//   }
+
+//   // if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+//   //   echo "Invalid email format.";
+//   //   exit;
+//   // }
+
+//   try {
+//     //Server settings
+//     $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+//     $mail->isSMTP();                                            //Send using SMTP
+//     $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+//     $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+//     $mail->Username   = 'mohammadarsalanwarsi@gmail.com';                     //SMTP username
+//     $mail->Password   = 'meyj xqak gmay nxcr';                               //SMTP password
+//     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+//     $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+//     // Recipients
+//     $mail->setFrom($email);
+//     $mail->addAddress('mohammadarsalanwarsi@gmail.com'); // Recipient email
+
+//     // Content
+//     $mail->isHTML(true);
+//     $mail->Subject = 'E-SHELF Contact-Us';
+//     $mail->Body    = "
+//       <html>
+//       <head>
+//       <meta charset='UTF-8'>
+//       <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+//       </head>
+//       <body>
+//       <p><strong>Name:</strong> $name</p>
+//       <p><strong>Email:</strong> $email</p>
+//       <p><strong>Subject:</strong> $subject</p>
+//       <p><strong>Message:</strong> $message</p>
+//       </body>
+//       </html>
+//       ";
+
+//     // Send email
+//     $mail->send();
+//     echo 'Email sent successfully.';
+//   } catch (Exception $e) {
+//     echo "Email could not be sent. Mailer Error: {$mail->ErrorInfo}";
+//   }
+// }

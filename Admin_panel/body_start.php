@@ -59,7 +59,7 @@
                     <ul>
                         <li> <a href="All_orders.php"><i class="bx bx-right-arrow-alt"></i>All Orders</a>
                         </li>
-                        <li> <a href="Pending_Orders.php"><i class="bx bx-right-arrow-alt"></i>UnConfirmed Orders</a>
+                        <!-- <li> <a href="Pending_Orders.php"><i class="bx bx-right-arrow-alt"></i>UnConfirmed Orders</a>
                         </li>
                         <li> <a href="Pending_Orders.php"><i class="bx bx-right-arrow-alt"></i>Pending Payment Orders</a>
                         </li>
@@ -70,7 +70,7 @@
                         <li> <a href="Delived_Orders.php"><i class="bx bx-right-arrow-alt"></i>Delivered Orders</a>
                         </li>
                         <li> <a href="Cancelled_Orders.php"><i class="bx bx-right-arrow-alt"></i>Cancelled Orders</a>
-                        </li>
+                        </li> -->
                     </ul>
                 </li>
                 <li class="menu-label">Events</li>
